@@ -22,3 +22,4 @@
 18. [修改placeholder 颜色](https://github.com/wqjiao/Points-Issues/issues/18)
 19. [input 标签 autocomplete 属性](https://github.com/wqjiao/Points-Issues/issues/19)
 20. [ input text select() 方法](https://github.com/wqjiao/Points-Issues/issues/20)
+21. [使用 translate 字体变模糊情况](https://github.com/wqjiao/Points-Issues/issues/21)
