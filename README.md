@@ -23,3 +23,7 @@
 19. [input 标签 autocomplete 属性](https://github.com/wqjiao/Points-Issues/issues/19)
 20. [ input text select() 方法](https://github.com/wqjiao/Points-Issues/issues/20)
 21. [使用 translate 字体变模糊情况](https://github.com/wqjiao/Points-Issues/issues/21)
+22. [元素水平垂直居中对齐](https://github.com/wqjiao/Points-Issues/issues/22)
+23. [Object.keys/Object.values/Object.entries 用法](https://github.com/wqjiao/Points-Issues/issues/23)
+24. [requestAnimationFrame](https://github.com/wqjiao/Points-Issues/issues/24)
+25. [JS实现输入一个字符串，返回字符串翻转输出](https://github.com/wqjiao/Points-Issues/issues/25)
