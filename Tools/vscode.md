@@ -274,6 +274,16 @@
     }
     ```
 
+* 8、Easy Sass
+
+  "easysass.formats": [
+      {
+          "format": "compressed",  // 压缩
+          "extension": ".css"
+      }
+  ],
+  "easysass.targetDir": "./"  // 自定义css输出文件路径
+
 more and more： https://code.visualstudio.com/docs/getstarted/keybindings
 
 ## 六、折叠区域代码
