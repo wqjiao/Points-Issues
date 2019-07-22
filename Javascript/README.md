@@ -672,4 +672,54 @@ str.split('').reverse().join('');
 
 或者 使用遍历：索引从最大值开始，依次递减，字符串拼接
 
-## 16.
+## 16.前后端跨域问题
+
+* 方式一：JSONP
+
+基本原理就是通过动态创建script标签,然后利用src属性进行跨域,但是要注意JSONP只支持GET请求，不支持POST请求。
+
+* 方式二：CORS 跨域资源共享
+
+利用 nginx 或者 php、java 等后端语言设置允许跨域请求
+```js
+header('Access-Control-Allow-Origin:*'); // 允许所有来源访问
+header('Access-Control-Allow-Method:POST,GET'); // 允许访问的方式
+```
+
+* 方式三：服务器代理
+
+浏览器有跨域限制，但是服务器不存在跨域问题，所以可以由服务器请求所要域的资源再返回给客户端。
+
+* 方式四：Nginx 反向代理
+
+## 17.Canvas 图片跨域问题
+
+获取 Canvas 绘制的图片时，报出错误信息：
+`Uncaught DOMException: Failed to execute 'toDataURL' on 'HTMLCanvasElement': Tainted canvases may not be exported.`。大致的意思是'被修改的画布不能被导出'。没有得到 `CORS`(Cross-domain resource sharing) 权限，不过 [stackoverflow](https://stackoverflow.com/questions/20424279/canvas-todataurl-securityerror) 上已经有人给出了解决方法，使用 `image.setAttribute("crossOrigin", 'Anonymous')` 获得 `CORS` 权限。
+
+```javascript
+let image = new Image();
+
+// CORS 策略，会存在跨域问题 https://stackoverflow.com/questions/20424279/canvas-todataurl-securityerror
+image.setAttribute("crossOrigin", 'Anonymous'); // 允许跨域获取该图片
+
+image.src = url;
+
+image.onload = function () {
+    let canvas = document.createElement('canvas');
+
+    canvas.width = this.naturalWidth;
+    canvas.height = this.naturalHeight;
+
+    canvas.getContext('2d').drawImage(this, 0, 0);
+    // Data URI
+    resolve(canvas.toDataURL('image/png'));
+};
+
+// console.log(image.src);
+image.onerror = () => {
+    reject(new Error('图片流异常'));
+};
+```
+
+## 18.
