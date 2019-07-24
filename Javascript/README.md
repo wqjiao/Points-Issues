@@ -4,14 +4,14 @@
 
 * 宽松相等
 
-    ```
-    const a = { value : 0 };
-    a.valueOf = function() {
-        return this.value += 1;
-    };
+```js
+const a = { value : 0 };
+a.valueOf = function() {
+    return this.value += 1;
+};
 
-    console.log(a == 1 && a == 2 && a == 3); // true
-    ```
+console.log(a == 1 && a == 2 && a == 3); // true
+```
     
 注意：
     宽松相等 == 会先将左右两两边的值转化成相同的原始类型，然后再去比较他们是否相等。
@@ -23,32 +23,82 @@
 可选参数 PreferredType 可以指定最终转化的类型，它可以是 Number 类型或 String 类型，
 这依赖于 ToPrimitive() 方法执行的结果返回的是 Number 类型或 String 类型
 
+```js
+const ToPrimitive = (obj, preferredType='Number') => {
+    let Utils = {
+        typeOf: function(obj) {
+            return Object.prototype.toString.call(obj).slice(8, -1);
+        },
+        isPrimitive: function(obj) {
+            let types = ['Null', 'String', 'Boolean', 'Undefined', 'Number'];
+            return types.indexOf(this.typeOf(obj)) !== -1;
+        }
+    };
+   
+    if (Utils.isPrimitive(obj)) {
+        return obj;
+    }
+    
+    preferredType = (preferredType === 'String' || Utils.typeOf(obj) === 'Date') ?
+     'String' : 'Number';
+
+    if (preferredType === 'Number') {
+        if (Utils.isPrimitive(obj.valueOf())) {
+            return obj.valueOf()
+        };
+        if (Utils.isPrimitive(obj.toString())) {
+            return obj.toString()
+        };
+    } else {
+        if (Utils.isPrimitive(obj.toString())) {
+            return obj.toString()
+        };
+        if (Utils.isPrimitive(obj.valueOf())) {
+            return obj.valueOf()
+        };
+    }
+}
+
+let a = {};
+ToPrimitive(a); // "[object Object]",与上面文字分析的一致
+```
+
 * 严格相等
 
-    ```
-    var value = 0; //window.value
-    Object.defineProperty(window, 'a', {
-        get: function() {
-            return this.value += 1;
-        }
-    });
+```js
+var value = 0; // window.value
+Object.defineProperty(window, 'a', {
+    get: function() {
+        return this.value += 1;
+    }
+});
 
-    console.log(a===1 && a===2 && a===3) // true
-    ```
-    
+console.log(a === 1 && a === 2 && a === 3) // true
+```
+
+注意：这里声明的 value 变量不能使用 let 定义变量，否则结果就是 false，因为从 ES6 开始，全局变量和顶层对象的属性开始分离、脱钩。
+
 * 类型固定时，宽松相等 与 严格相等
 
-    ```
-    var value = 0;
-    const a = {
-        get: function() {
-            return this.value += 1;
-        }
+```js
+var value = 0; // window.value 变量定义同上
+const a = {
+    get: function() {
+        return this.value += 1;
     }
+}
 
-    console.log((0, a.get)() == 1 && (0, a.get)() == 2 && (0, a.get)() == 3); // true
-    console.log((0, a.get)() === 1 && (0, a.get)() === 2 && (0, a.get)() === 3); // true
-    ```
+// 或者将上面代码替换成：
+const a = {
+	value: 0,
+    get: () => {
+        return a.value += 1;
+    }
+}
+
+console.log((0, a.get)() == 1 && (0, a.get)() == 2 && (0, a.get)() == 3); // true
+console.log((0, a.get)() === 1 && (0, a.get)() === 2 && (0, a.get)() === 3); // true
+```
 
 * Object.defineProperty
 
@@ -279,6 +329,7 @@ Function.prototype.bind 来为事件处理函数传递参数
     alert(arr.length === 0); // true
 
 ## 7.js 遍历对象
+
 * 1、for in
 
     循环遍历对象自身的和继承的可枚举属性(不含 Symbol 属性)
@@ -722,4 +773,78 @@ image.onerror = () => {
 };
 ```
 
-## 18.
+## 18.括号问题
+
+`return` 语句后面没有东西的时候它什么都不返回。 实际上，JS 后面 `return` 添加一个 `;`。
+
+```js
+// return 后面不加括号
+function foo() {
+    return
+    {
+        foo: 'bar'
+    }
+}
+foo(); // undefined
+
+// return 后面加括号
+function foo() {
+    return {
+        foo: 'bar'
+    }
+}
+foo(); // {foo: "bar"}
+```
+
+## 19.数组和对象的和(== 隐式转换)
+
+`犀牛书 49 页`
+
+```
+> !+[]+!![]+!![]+!![]+!![]+!![]+!![]+!![]+!![]
+9
+
+> {} + []
+0
+
+> [] + {}
+"[object Object]"
+
+> [] + []
+""
+
+> {} + {}
+"[object Object][object Object]"
+
+> {} + [] === [] + {}
+true
+
+> [] == []
+false
+> [] == {}
+false
+
+> [] == 0
+true
+> [] == ![]
+true
+> "" == false
+true
+> ['0'] == 0
+true
+> ['1'] == 0 
+false
+
+```
+
+`[] == {}` 与 `[] == []` 的结果都是 `false` 是因为两个对象比较时候，比较的是引用，数组也是对象。
+`[]`、`[]` 相当于声明了两个不同的数组，而数组是引用类型的值，引用的是地址，比较的是内存中存的是否是同一个对象，虽然都是两个空数组，但是引用地址不一样。
+
+## 20.sort() 自动类型转换
+
+sort() 函数中不添加任何方法时，自动将值的类型转换成字符串类型，so：
+
+```js
+[1, 5, 20, 10].sort(); // [1, 10, 20, 5]
+[1, 5, 20, 10].sort(function(a, b) {return a - b}); // [1, 5, 10, 20]
+```
