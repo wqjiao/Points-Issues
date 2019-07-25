@@ -806,6 +806,8 @@ foo(); // {foo: "bar"}
 
 > {} + []
 0
+> console.log({} + [])
+"[object Object]"
 
 > [] + {}
 "[object Object]"
@@ -834,6 +836,9 @@ true
 true
 > ['1'] == 0 
 false
+
+> Math.max() > Math.min()
+false // -Infinity / Infinity
 
 ```
 
