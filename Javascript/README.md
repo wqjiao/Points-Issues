@@ -853,3 +853,135 @@ sort() 函数中不添加任何方法时，自动将值的类型转换成字符�
 [1, 5, 20, 10].sort(); // [1, 10, 20, 5]
 [1, 5, 20, 10].sort(function(a, b) {return a - b}); // [1, 5, 10, 20]
 ```
+
+## 21.以下输出什么，this指向
+
+```js
+const shape = {
+    radius: 10,
+    diameter() {
+        console.log('**', this); // {radius: 10, diameter: ƒ, perimeter: ƒ}
+        return this.radius * 2
+    },
+    perimeter: () => {
+        console.log('&&', this); // Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, parent: Window, …}
+        return 2 * Math.PI * this.radius
+    }
+}
+
+shape.diameter(); // 20
+shape.perimeter(); // NaN
+```
+
+<details><summary><b>解析</b></summary>
+<p>
+
+注意 diameter 的值是一个常规函数，但是 perimeter 的值是一个箭头函数。
+
+对于箭头函数，this 关键字指向的是它当前周围作用域（简单来说是包含箭头函数的常规函数，如果没有常规函数的话就是全局对象），这个行为和常规函数不同。这意味着当我们调用 perimeter 时，this 不是指向 shape 对象，而是它的周围作用域（在例子中是 window）。
+
+在 window 中没有 radius 这个属性，因此返回 undefined。
+
+</p>
+</details>
+
+## 22.事件传播的三个阶段
+
+事件传播分为三个阶段：事件捕获，目标对象本身的事件程序，事件冒泡
+
+`addEventListener` 的第三个参数是 `Boolean` 类型：
+    true -- 事件捕获截断
+```html
+<button id="H_Btn">测试按钮</button>
+<script>
+    function getEleById(id) {
+        return document.getElementById(id);
+    }
+    window.addEventListener('click', function () {
+        console.info('window 事件捕获');
+    }, true);
+    document.body.addEventListener('click', function () {
+        console.info('body 事件捕获');
+    }, true);
+    var btn = document.getElementById('H_Btn');
+    document.body.addEventListener('click', function(event) {
+        if (event.target === btn) {
+            console.warn('按钮禁止被点击')
+            return event.stopPropagation();
+        };
+    }, true);
+    btn.addEventListener('click', function () {
+        console.log('按钮被点击');
+    }, false);
+    document.body.addEventListener('click', function () {
+        console.warn('body 事件冒泡');
+    }, false);
+    window.addEventListener('click', function () {
+        console.warn('window 事件冒泡');
+    }, false);
+</script>
+```
+
+## 23.所有对象都有原型么
+
+除了基本对象（base object），所有对象都有原型。基本对象可以访问一些方法和属性，比如 .toString。这就是为什么你可以使用内置的 JavaScript 方法！所有这些方法在原型上都是可用的。虽然 JavaScript 不能直接在对象上找到这些方法，但 JavaScript 会沿着原型链找到它们，以便于你使用。
+
+## 24.前 ++，后 ++
+
+```js
+let number = 0
+console.log(number++); // 0
+console.log(++number); // 2
+console.log(number); // 2
+```
+
+## 25.使用标记模板后的值是什么
+
+```js
+function getPersonInfo(one, two, three) {
+  console.log(one)
+  console.log(two)
+  console.log(three)
+}
+
+const person = 'Lydia'
+const age = 21
+
+getPersonInfo`${person} is ${age} years old`
+// A: "Lydia" 21 ["", " is ", " years old"]
+// B: ["", " is ", " years old"] "Lydia" 21
+// C: "Lydia" ["", " is ", " years old"] 21
+```
+
+<details><summary><b>解析</b></summary>
+<p>
+
+如果使用标记模板字面量，第一个参数的值总是包含字符串的数组。其余的参数获取的是传递的表达式的值！
+
+</p>
+</details>
+
+## 26.比较以下用法
+
+```js
+const arr = [1, 2, 3, 4, 5];
+const obj = { 1: 'a', 2: 'b', 3: 'c' }
+const set = new Set([1, 2, 3, 4, 5])
+
+obj.hasOwnProperty('1'); // true
+obj.hasOwnProperty(1); // true
+set.has('1'); // false
+set.has(1); // true
+```
+
+<details><summary><b>解析</b></summary>
+<p>
+
+所有对象的键（不包括 Symbol）在底层都是字符串，即使你自己没有将其作为字符串输入。这就是为什么 obj.hasOwnProperty('1') 也返回 true。
+
+对于集合，它不是这样工作的。在我们的集合(集合类：Array、Map、Set)中没有 '1'：set.has('1') 返回 false。它有数字类型为 1，set.has(1) 返回 true。
+
+</p>
+</details>
+
+## 27.JavaScript 全局执行上下文为你做了两件事：全局对象和 this 关键字
