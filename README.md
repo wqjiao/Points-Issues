@@ -29,6 +29,7 @@
 25. [JS实现输入一个字符串，返回字符串翻转输出](https://github.com/wqjiao/Points-Issues/issues/25)
 26. [div 包裹 img 不做任务设置的情况下img与div下面有白边](https://github.com/wqjiao/Points-Issues/issues/26)
 27. [Canvas 图片跨域问题](https://github.com/wqjiao/Points-Issues/issues/27)
+28. [对象(排除 Symbol)的键在底层都是字符串,无论传入的是否为字符串](https://github.com/wqjiao/Points-Issues/issues/28)
 
 [GitHub 中记录 Javascript 题目的优秀项目 javascript-questions](https://github.com/lydiahallie/javascript-questions)
 
