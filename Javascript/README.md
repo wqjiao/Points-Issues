@@ -957,6 +957,7 @@ getPersonInfo`${person} is ${age} years old`
 <p>
 
 如果使用标记模板字面量，第一个参数的值总是包含字符串的数组。其余的参数获取的是传递的表达式的值！
+https://www.it-swarm.net/zh/javascript/%E5%8F%8D%E5%BC%95%E5%8F%B7%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0/1052333521/
 
 </p>
 </details>
