@@ -448,9 +448,9 @@ arr.splice(1, 2); // ['a','d']
 
 ```javascript
 let arr = ['a','b','c','d'];
-// 替换起始下标为 1，长度为 1 的一个值为 ‘ttt’，len 设置的 1
+// 替换起始下标为 1，长度为 1 的一个值为 'ttt'，len 设置的 1
 arr.splice(1, 1, 'ttt'); // ['a','ttt','c','d']
-// 替换起始下标为1，长度为2的两个值为‘ttt’，len设置的1
+// 替换起始下标为1，长度为2的两个值为'ttt'，len设置的1
 arr.splice(1, 2, 'ttt'); // ['a','ttt','d']         
 ```
 
@@ -458,7 +458,7 @@ arr.splice(1, 2, 'ttt'); // ['a','ttt','d']
 
 ```javascript
 let arr = ['a','b','c','d'];
-// 表示在下标为 1 处添加一项 ‘ttt’
+// 表示在下标为 1 处添加一项 'ttt'
 arr.splice(1, 0, 'ttt'); // ['a','ttt','b','c','d']
 ```
 
@@ -986,3 +986,44 @@ set.has(1); // true
 </details>
 
 ## 27.JavaScript 全局执行上下文为你做了两件事：全局对象和 this 关键字
+
+## 28.判断 数值 n 中包含几个 m
+
+```js
+function (n, m) {
+    String(n).split('').filter(item => item === String(m)).length
+}
+```
+
+## 29.为什么for循环嵌套顺序会影响性能
+
+
+## 30.var 与 let 性能差异
+
+```js
+var start = new Date();
+for (var i = 0; i < 10000000; i++) {
+	var num = 123;
+	var str = 'abc';
+	var obj = {
+		key: 'value'
+	};
+	var arr = ['bill', 'dell'];
+}
+let end = new Date();
+console.log('使用 var:', end - start);
+
+for (let i = 0; i < 10000000; i++) {
+	let num = 123;
+	let str = 'abc';
+	let obj = {
+		key: 'value'
+	};
+	let arr = ['bill', 'dell'];
+}
+let end1 = new Date();
+
+console.log('使用 let:', end1 - end);
+```
+
+## 31.在Vue 和 React 中key的作用是为了在diff算法执行时更快的找到对应的节点，提高diff速度
