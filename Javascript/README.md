@@ -1001,7 +1001,7 @@ function (n, m) {
 ## 30.var 与 let 性能差异
 
 ```js
-var start = new Date();
+console.time('使用 var');
 for (var i = 0; i < 10000000; i++) {
 	var num = 123;
 	var str = 'abc';
@@ -1010,9 +1010,9 @@ for (var i = 0; i < 10000000; i++) {
 	};
 	var arr = ['bill', 'dell'];
 }
-let end = new Date();
-console.log('使用 var:', end - start);
+console.timeEnd('使用 var');
 
+console.time('使用 let');
 for (let i = 0; i < 10000000; i++) {
 	let num = 123;
 	let str = 'abc';
@@ -1023,7 +1023,7 @@ for (let i = 0; i < 10000000; i++) {
 }
 let end1 = new Date();
 
-console.log('使用 let:', end1 - end);
+console.timeEnd('使用 let');
 ```
 
-## 31.在Vue 和 React 中key的作用是为了在diff算法执行时更快的找到对应的节点，提高diff速度
+## 31.在 Vue 和 React 中 key 的作用是为了在diff算法执行时更快的找到对应的节点，提高diff速度
