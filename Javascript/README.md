@@ -1047,3 +1047,27 @@ console.timeEnd('使用 let');
 ```
 
 ## 31.在 Vue 和 React 中 key 的作用是为了在diff算法执行时更快的找到对应的节点，提高diff速度
+
+## flatMap 与 map 区别
+
+`flatMap()` 方法首先使用映射函数映射每个元素，然后将结果压缩成一个新数组。它与 `map` 和 深度值1的 `flat` 几乎相同，但 `flatMap` 通常在合并成一种方法的效率稍微高一些。
+
+* `arr.flat((currentValue, index, array) => {}[thisArg])`
+
+```js
+let arr = ["今天天气不错", "", "早上好"]
+
+arr.map(s => s.split("")); // [["今", "天", "天", "气", "不", "错"],[""], ["早", "上", "好"]]
+arr.flatMap(s => s.split("")); // ["今", "天", "天", "气", "不", "错", "早", "上", "好"]
+arr.flatMap(s => [s.split("")]); // [["今", "天", "天", "气", "不", "错"],[""], ["早", "上", "好"]]
+```
+
+* 使用 `reduce` 与 `concat` 做等价操作
+
+```js
+let arr1 = [1, 2, 3, 4];
+
+arr1.flatMap(x => [x * 2]); // arr1.flatMap(x => x * 2);
+// 等价于
+arr1.reduce((acc, x) => acc.concat([x * 2]), []); // [2, 4, 6, 8]
+```
