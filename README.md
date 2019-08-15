@@ -33,6 +33,7 @@
 29. [将非数值转化成数值](https://github.com/wqjiao/Points-Issues/issues/29)
 30. [提取变量类型](https://github.com/wqjiao/Points-Issues/issues/30)
 31. [reduce、concat 实现类似 flat() 的数组降维](https://github.com/wqjiao/Points-Issues/issues/31)
+32. [flatMap 与 map](https://github.com/wqjiao/Points-Issues/issues/32)
 
 <!-- [GitHub 中记录 Javascript 题目的优秀项目 javascript-questions](https://github.com/lydiahallie/javascript-questions) -->
 

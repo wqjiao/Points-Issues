@@ -1010,13 +1010,48 @@ set.has(1); // true
 ## 28.判断 数值 n 中包含几个 m
 
 ```js
-function (n, m) {
-    String(n).split('').filter(item => item === String(m)).length
+function containLength(m, n) {
+    return String(m).split('').filter(item => item === String(n)).length
 }
 ```
 
 ## 29.为什么for循环嵌套顺序会影响性能
 
+```js
+console.time('first cyclic');
+for (let i = 0; i < 100; i++) {
+    for (let j = 0; j < 1000; j++) {
+        for (let k = 0; k < 10000; k++) {
+            // ...
+        }
+    }
+}
+console.timeEnd('first cyclic');
+console.time('second cyclic');
+for (let i = 0; i < 10000; i++) {
+    for (let j = 0; j < 1000; j++) {
+        for (let k = 0; k < 100; k++) {
+            // ...
+        }
+    }
+}
+console.timeEnd('second cyclic');
+```
+第一种循环
+| 变量 | 实例化(次数) | 初始化(次数) |    比较(次数)   |    自增(次数)   |
+| :--: | :---------- | :---------- | :------------- | :-------------- |
+|  i   | 1           | 1           | 100            | 100             |     
+|  j   | 100         | 100         | 100*1000       | 100*1000        |     
+|  k   | 100*1000    | 100*1000    | 100*1000*10000 | 100*1000*10000  | 
+
+第二种循环
+| 变量 | 实例化(次数) | 初始化(次数) |    比较(次数)   |    自增(次数)   |
+| :--: | :---------- | :---------- | :------------- | :-------------- |
+|  i   | 1           | 1           | 10000          | 10000           |     
+|  j   | 10000       | 10000       | 10000*1000     | 10000*1000      |     
+|  k   | 10000*1000  | 10000*1000  | 10000*1000*100 | 10000*1000*100  |     
+
+两个循环的次数的是一样的，但是 j 与 k 的初始化次数是不一样的。所以在比较大的循环嵌套时，建议将循环次数多的放在里层。
 
 ## 30.var 与 let 性能差异
 
@@ -1048,11 +1083,15 @@ console.timeEnd('使用 let');
 
 ## 31.在 Vue 和 React 中 key 的作用是为了在diff算法执行时更快的找到对应的节点，提高diff速度
 
-## flatMap 与 map 区别
+## 32.flatMap 与 map 区别
 
-`flatMap()` 方法首先使用映射函数映射每个元素，然后将结果压缩成一个新数组。它与 `map` 和 深度值1的 `flat` 几乎相同，但 `flatMap` 通常在合并成一种方法的效率稍微高一些。
-
-* `arr.flat((currentValue, index, array) => {}[thisArg])`
+`flatMap()` 方法对原数组的每个成员执行一个函数（相当于执行Array.prototype.map()），然后对返回值组成的数组执行 `flat()` 方法。该方法返回一个新数组，不改变原数组。
+`flatMap()` 方法的参数是一个遍历函数，该函数可以接受三个参数，分别是当前数组成员、当前数组成员的位置（从零开始）、原数组。
+```js
+arr.flatMap(function callback(currentValue[, index[, array]]) {
+  // ...
+}[, thisArg])
+```
 
 ```js
 let arr = ["今天天气不错", "", "早上好"]
@@ -1071,3 +1110,54 @@ arr1.flatMap(x => [x * 2]); // arr1.flatMap(x => x * 2);
 // 等价于
 arr1.reduce((acc, x) => acc.concat([x * 2]), []); // [2, 4, 6, 8]
 ```
+
+## 33.扑克牌问题
+
+有一堆扑克牌，将牌堆第一张放到桌子上，再将接下来的牌堆的第一张放到牌底，如此往复；
+
+最后桌子上的牌顺序为： (牌底) 1,2,3,4,5,6,7,8,9,10,11,12,13 (牌顶)；
+
+问：原来那堆牌的顺序，用函数实现。
+
+思考：相当于：从牌堆的顶部(数组左边)，index为1开始，奇数放一张到桌上,偶数再 push 到原数组中，依次循环直到 length 为 0；逆向思维就是：从牌堆的底部(数组右边)，奇数放一张到桌上,偶数再 unshift 到原数组中，依次循环直到 length 为 0。
+
+```js
+function poke(arr) {
+    let i = 1,
+        out = [];
+
+    while (arr.length) {
+        
+        if (i % 2) {
+            out.push(arr.shift());
+        } else {
+            arr.push(arr.shift());
+        }
+        console.log('***', 'i:', i, i%2,', out:', out, ', arr:', arr)
+        i++;
+    }
+    return out;
+}   
+    
+
+function reverse(arr) {
+    let i = 1,
+        out = [];
+
+    while (arr.length) {
+        if (i % 2) {
+            out.unshift(arr.pop());
+        } else {
+            out.unshift(out.pop());
+        }
+        i++;
+    }
+    return out;
+}
+
+reverse([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13])
+// [1, 12, 2, 8, 3, 11, 4, 9, 5, 13, 6, 10, 7]
+poke([1, 12, 2, 8, 3, 11, 4, 9, 5, 13, 6, 10, 7])
+// [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+```
+

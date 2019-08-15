@@ -248,4 +248,11 @@ img {
 }
 ```
 
-## 8.
+## 8.自定义文本选取的高亮样式
+
+```css
+::selection {
+    color: #666;
+    background-color: palegoldenrod;
+}
+```
