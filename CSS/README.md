@@ -4,19 +4,82 @@
 
 * 单行文本
 
+```css
+p {
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: nowrap; 
+}
+```
 
 * 多行文本溢出显示省略号，webkit私有属性，仅支持webkit浏览器
 
+```css
+p {
     overflow: hidden;
     text-overflow: ellipsis;
     text-overflow: ellipsis-lastline;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /*需要显示的行数*/
+    -webkit-line-clamp: 2; /* 需要显示的行数 */
     -webkit-box-orient: vertical;
-    border: 1px solid #ddd;
+}
+```
+
+* 考虑兼容性 -- 显示三行，未超出也显示 `...`，始终在 `box` 右侧
+
+```css
+p {
+    position: relative;
+    line-height: 20px;
+    max-height: 40px;
+    overflow: hidden;
+}
+p::after {
+    content: "...";
+    position: absolute;
+    bottom: 0; right: 0;
+    padding-left: 40px;
+    background: -webkit-linear-gradient(left, transparent, #fff 55%);
+    background: -o-linear-gradient(right, transparent, #fff 55%);
+    background: -moz-linear-gradient(right, transparent, #fff 55%);
+    background: linear-gradient(to right, transparent, #fff 55%);
+}
+```
+
+* js 控制，出现英文单词不准确，需要加强
+
+```html
+<style>
+p {
+    width: 200px;
+    line-height: 28px;
+    margin-bottom: 10px;
+}
+</style>
+<p data-cut="3">
+    这边的文字很长很 hello Hello World 长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长
+</p>
+<script>
+    (() => {
+        console.log(document.querySelectorAll('[data-cut]'))
+        document.querySelectorAll('[data-cut]').forEach(node => {
+            const computedStyle = getComputedStyle(node);
+            const width = +computedStyle.width.match(/(\S*)px/)[1];
+            const fontSize = +computedStyle.fontSize.match(/(\S*)px/)[1];
+            const lineHeight = +computedStyle.lineHeight.match(/(\S*)px/)[1];
+            // 英文单词不行 (×)
+            const length = Math.floor(width / fontSize) * node.dataset.cut;
+            const text = node.innerText.trim();
+
+            console.log(text.length, width, fontSize, length)
+
+            if (text.length >= length) {
+                node.innerText = text.substr(0, length - 1) + '...';
+            }
+        });
+    })();
+</script>
+```
 
 ## 2.自定义滚动条样式
 
@@ -254,5 +317,16 @@ img {
 ::selection {
     color: #666;
     background-color: palegoldenrod;
+}
+```
+
+## 8.简单实现图片滤镜效果
+
+```css
+div {
+    width: 300px;
+    height: 180px;
+    --c: #ff000088;
+    background: linear-gradient(var(--c),var(--c)),url(https://user-gold-cdn.xitu.io/2019/9/11/16d1bec29f3b3d38?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1);
 }
 ```
