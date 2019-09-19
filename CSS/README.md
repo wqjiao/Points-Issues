@@ -330,3 +330,14 @@ div {
     background: linear-gradient(var(--c),var(--c)),url(https://user-gold-cdn.xitu.io/2019/9/11/16d1bec29f3b3d38?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1);
 }
 ```
+
+## 9. :any-link
+
+`:any-link`  `CSS` 伪类 选择器代表一个有链接锚点的元素，而不管它是否被访问过，也就是说，它会匹配每一个有 `href` 属性的 `<a>`、`<area>` 或 `<link>` 元素。因此，它会匹配到所有的 `:link` 或 `:visited`。
+
+```css
+:any-link {
+    color: #1890ff;
+}
+```
+
