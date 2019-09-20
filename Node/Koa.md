@@ -86,3 +86,4 @@ app.use(router.routes()).use(router.allowedMethods());
 app.listen(3000);
 ```
 
+* ctx 包括 response request
