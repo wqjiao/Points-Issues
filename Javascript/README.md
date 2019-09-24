@@ -1161,3 +1161,148 @@ poke([1, 12, 2, 8, 3, 11, 4, 9, 5, 13, 6, 10, 7])
 // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 ```
 
+## 34.浏览器的重排重绘
+
+* 重排
+
+部分渲染树（或者整个渲染树）需要重新分析并且节点尺寸需要重新计算，表现为重新生成布局，重新排列元素
+
+* 重绘
+
+由于节点的几何属性发生改变或者由于样式发生改变，例如改变元素背景色时，屏幕上的部分内容需要更新，表现为某些元素的外观被改变
+
+`重绘` 不一定 `重排`，但 `重排` 一定会产生 `重绘`。
+
+## 35.宏任务、微任务 Event loop
+
+`宏任务` 与 `微任务` 皆为异步任务，它们都属于一个队列，主要区别在于他们的执行顺序，Event Loop的走向和取值
+
+<img src="../assets/EventLoop.png" />
+
+1. 多个 `setTimeout`
+```js
+setTimeout(() => {
+	new Promise(r => {
+		console.log(1);
+		r();
+    }).then(() => {
+		console.log(2);
+    });
+});
+setTimeout(() => {
+	new Promise(r => {
+		console.log(3);
+		r();
+    }).then(() => {
+		console.log(4);
+    });
+});
+// 1 2 3 4
+
+setTimeout(() => {
+	new Promise(r => {
+        console.log(1);
+        // 下一个宏任务
+		setTimeout(r);
+    }).then(() => {
+		console.log(2);
+    }).then(() => {
+		console.log(3);
+    });
+});
+setTimeout(() => {
+	new Promise(r => {
+        console.log(4);
+        // 下一个宏任务
+		setTimeout(r);
+    }).then(() => {
+		console.log(5);
+    }).then(() => {
+		console.log(6);
+    });
+});
+// 1 4 2 3 5 6
+```
+
+`setTimeout` 是宏任务，只有执行完宏任务中的其他若干微任务时，才会执行下一个宏任务。
+
+2. 多个异步代码
+
+```js
+async function async1() {
+	console.log(1);
+	await async2();
+	console.log(2);
+}
+
+async function async2() {
+	console.log(3);
+}
+
+console.log(4);
+
+setTimeout(() => {
+	console.log(5);
+});
+
+async1();
+
+new Promise(r => {
+    console.log(6);
+	r();
+}).then(() => {
+	console.log(7);
+});
+
+console.log(8);
+
+// 4,1,3,6,2,7,8,5
+```
+
+* 宏任务
+
+|  --- # ---  |  --- 浏览器 ---  |  --- Node ---  |
+|  I/O  |  ✅  |  ✅  |
+|  setTimeout  |  ✅  |  ✅  |
+|  setInterval  |  ✅  |  ✅  |
+|  setImmediate  |  ❌  |  ✅  |
+|  requestAnimationFrame  |  ✅  |  ❌  |
+
+* 微任务
+
+|  --- # ---  |  --- 浏览器 ---  |  --- Node ---  |
+|  process.nextTick  |  ❌	|  ✅  |
+|  MutationObserver	 |  ✅	|  ❌  |
+|  Promise.then catch finally  |  ✅  |  ✅  |
+
+[宏任务/微任务]/(https://juejin.im/post/5b73d7a6518825610072b42b)
+
+## 36.时间提示小方法
+
+```js
+function fromNow(date) {
+    let dur = new Date - new Date(date);
+
+    if (!date) return '请输入正确格式的时间';
+    if (dur < 0) return '当前还没到输入的时间';
+    
+	return (
+		dur < 10 * 1000 && '刚刚' ||
+		dur < 60 * 1000 && '不到一分钟' ||
+		dur < 30 * 60 * 1000 && '半小时前' ||
+		dur < 60 * 60 * 1000 && '一小时前' ||
+		dur < 12* 60 * 60 * 1000 && '半天之内' ||
+		dur < 24 * 60 * 60 * 1000 && '一天之内' ||
+		dur < 3 * 24 * 60 * 60 * 1000 && '三天之内' ||
+		dur < 7 * 24 * 60 * 60 * 1000 && '一周之内' ||
+		dur < 30 * 24 * 60 * 60 * 1000 && '一月之内' ||
+		dur < 6 * 30 * 24 * 60 * 60 * 1000 && '半年之内' ||
+        dur < 12 * 30 * 24 * 60 * 60 * 1000 && '快一年了' ||
+        '很久远了'
+	);
+}
+
+fromNow('2019-09-24 18:00:00');
+fromNow('2019/09/24 18:00:00');
+```
+
