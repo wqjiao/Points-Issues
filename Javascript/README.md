@@ -1306,3 +1306,33 @@ fromNow('2019-09-24 18:00:00');
 fromNow('2019/09/24 18:00:00');
 ```
 
+## 37.循环内的闭包
+
+这是一个面试中常见的问题，循环内使用闭包
+
+```js
+for (var i = 0; i < 4; i++) {
+    setTimeout(function() {
+        console.log(i);
+    });
+}
+// 4 4 4 4
+
+for (let i = 0; i < 4; i++) {
+    setTimeout(function() {
+        console.log(i);
+    });
+}
+// 0 1 2 3
+
+for (var i = 0; i < 4; i++) {
+    setTimeout(function(i_local) {
+        return function () {
+            console.log(i_local);
+        }
+    }(i))
+}
+// 0 1 2 3
+```
+
+因为 `let i` 的是区块变量，每个 `i` 只能存活到大括号结束，并不会把后面的 `for` 循环的 `i` 值赋给前面的 `setTimeout` 中的 `i`;而 `var i` 则是局部变量，这个 `i` 的生命周期不受 `for` 循环的大括号限制;
