@@ -124,7 +124,7 @@ function filterRepet(arr) {
 }
 ```
 
-* 3.全局、局部变量
+* 3.全局/局部变量
 
 - 'Goodbye Jack'
 ```js

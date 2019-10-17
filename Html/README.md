@@ -1,5 +1,8 @@
 # HTML 相关问题
 
+* [Canvas](./Canvas.md)
+* [meta标签](./meta标签.md)
+
 ## 1.input 标签 autocomplete 属性
 
 清除 input 框在页面中输入之后产生的历史记录,将 autocomplete 中的默认值 on 改成 off 即可

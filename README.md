@@ -34,6 +34,7 @@
 30. [提取变量类型](https://github.com/wqjiao/Points-Issues/issues/30)
 31. [reduce、concat 实现类似 flat() 的数组降维](https://github.com/wqjiao/Points-Issues/issues/31)
 32. [flatMap 与 map](https://github.com/wqjiao/Points-Issues/issues/32)
-
-<!-- [GitHub 中记录 Javascript 题目的优秀项目 javascript-questions](https://github.com/lydiahallie/javascript-questions) -->
-
+33. [什么是闭包](https://github.com/wqjiao/Points-Issues/issues/33)
+34. [var、let、const区别](https://github.com/wqjiao/Points-Issues/issues/34)
+35. [map、filter、reduce分别有什么作用](https://github.com/wqjiao/Points-Issues/issues/35)
+36. [深拷贝与浅拷贝的区别](https://github.com/wqjiao/Points-Issues/issues/36)
