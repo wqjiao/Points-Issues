@@ -34,7 +34,7 @@
 
     ![Query String Parameters](../assets/QueryStringParameter.png)
 
-2. `Form Data` 格式：`key=value&key=value`
+2. `Form Data` 格式：`key=value&key=value` 键值对形式
 
     - 当 `Content-type` 为 `application/x-www-form-urlencoded;charset=utf-8` 时，参数会以 `Form Data` 的形式(数据为 String 键值对格式)传递给接口，并且不会显示在接口 url 上。
 
@@ -79,7 +79,7 @@
         4. contentType: false --> 因为是由 `<form>` 表单构造的 `FormData` 对象，且已经声明了属性 `enctype="multipart/form-data"`，所以这里设置为 false。
         5. xhrFields: { withCredentials: true }, 跨域请求设置
 
-3. `Request Payload` 格式：`{key: value, key: value}`
+3. `Request Payload` 格式：`{key: value, key: value}` (后端经过反序列化得到对象)
 
     当 `Content-type` 为 `application/json;charset=utf-8` 时，参数会以 `Request Payload` 的形式(数据为 json 格式)传递给接口，并且不会显示在接口 url 上。
 

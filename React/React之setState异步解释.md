@@ -8,7 +8,7 @@
 
 ![setState 部分源码](../assets/setState.png)
 
-* `partialState` 在字面意思理解应该是部分状态，注释说明是这样的 ` Next partial state or function to produce next partial state to be merged with current state.`,大概翻译是 `下一个部分状态或函数，以产生下一个要与当前状态合并的部分状态。`。实际上，在项目中 `this.setState({})` 更新指定 `state` 时，其他的 `state` 是不受影响的，且所有的 `state` 与当前的更新的 `state` 做了合并。
+* `partialState` 在字面意思理解应该是部分状态，注释说明是这样的 ` Next partial state or function to produce next partial state to be merged with current state.`,大概翻译是 `下一个部分状态或函数，以产生下一个要与当前状态合并的部分状态。`。实际上，在项目中 `this.setState({})` 更新指定 `state` 时，其他的 `state` 与当前更新的 `state` 做了合并。
 
 * `callback` 回调函数，意指状态更新后的回调，在该函数中获取最新的 `state`。
 
@@ -18,6 +18,9 @@
 
 `/packages/shared/invariant.js`, 这个方法就是判断 `partialState` 的类型是否正确，抛出错误，附上源码：
 ![](../assets/invariant.png)
+
+但是在 V16.7.0版本之前 `invariant` 抛出的是不同类型的错误:
+![](../assets/invariantV16.7.0.png)
 
 `/packages/react-dom/src/server/ReactPartialRenderer.js`,把即将更新的 `state` push 到了 `queue` 中，在 `new Component` 时，将 `updater` 传进去，附上源码：
 ![](../assets/enqueueSetState.png)
@@ -43,12 +46,12 @@ class SetState extends React.Component {
 
     componentDidMount() {
         this.setState({ val: this.state.val + 1 })
-       console.log(this.state.val) // 输出的还是更新前的值 --> 0
+       console.log('钩子函数:', this.state.val) // 输出的还是更新前的值 --> 0
     }
     
     increment = () => {
         this.setState({ val: this.state.val + 1 })
-        console.log(this.state.val) // 输出的是更新前的val --> 0
+        console.log('合成方法:', this.state.val) // 输出的是更新前的val --> 0
     }
 
     render() {
@@ -83,7 +86,7 @@ class SetState extends React.Component {
 
     changeValue = () => {
         this.setState({ val: this.state.val + 1 })
-        console.log(this.state.val) // 输出的是更新后的值 --> 1
+        console.log('原生js事件:', this.state.val) // 输出的是更新后的值 --> 1
     }
 
     render() {
@@ -114,11 +117,11 @@ class SetState extends React.Component {
 
     componentDidMount() {
         setTimeout(_ => {
-            console.log('执行->第二步', this.state.val) // 输出更新前的值 --> 0
+            console.log('定时器->1:', this.state.val) // 输出更新前的值 --> 0
             this.setState({ val: this.state.val + 1 })
-            console.log('执行->第三步', this.state.val) // 输出更新后的值 --> 1
+            console.log('定时器->2:', this.state.val) // 输出更新后的值 --> 1
         }, 0);
-        console.log('执行->第一步', this.state.val) // 输出更新前的值 --> 0
+        console.log('钩子函数:', this.state.val) // 输出更新前的值 --> 0
     }
 
     render() {
@@ -184,17 +187,17 @@ class SetState extends React.Component {
     // setTimmout 中 setState 是可以同步拿到更新结果
     componentDidMount() {
         this.setState({ val: this.state.val + 1 })
-        console.log('第一步：', this.state.val); // 0
+        console.log('第一步->钩子函数：', this.state.val); // 0
     
         this.setState({ val: this.state.val + 1 })
-        console.log('第二步：', this.state.val); // 0
+        console.log('第二步->钩子函数：', this.state.val); // 0
     
         setTimeout(_ => {
             this.setState({ val: this.state.val + 1 })
-            console.log('第三步：', this.state.val); // 2
+            console.log('第三步->定时器：', this.state.val); // 2
         
             this.setState({ val: this.state.val + 1 })
-            console.log('第四步：', this.state.val); //  3
+            console.log('第四步->定时器：', this.state.val); //  3
         }, 0)
     }
 
@@ -220,7 +223,7 @@ this.setState(
         data: newData
     },
     () => {
-        console.log('最新的 state 值', me.state.data)
+        console.log('回调函数中获取:', me.state.data)
     }
 );
 ```
