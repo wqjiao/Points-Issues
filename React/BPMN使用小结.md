@@ -552,4 +552,4 @@ ColorPicker.$inject = [
 * [BPMN Github](https://github.com/bpmn-io/bpmn-js)
 * [BPMN 实例](https://github.com/bpmn-io/bpmn-js-examples)
 * [BPMN React 例子](https://github.com/wqjiao/bpmn-activiti)
-* [BPMN React 例子](https://github.com/imdwpeng/bpmn-editor)
+* [BPMN 其他例子](https://github.com/imdwpeng/bpmn-editor)
