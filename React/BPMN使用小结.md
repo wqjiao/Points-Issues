@@ -47,7 +47,7 @@ viewer.importXML(xml, function(err) {
 使用了 [ant-design-pro](https://pro.ant.design/) 最初搭建好的后台项目(非 ts 版本) 搭建的项目：
 [BPMN React 例子](https://github.com/wqjiao/bpmn-activiti)
 
-![](../assets/BPMN.png)
+![](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/BPMN.png)
 
 流程设计的界面按照图片上的布局可以分成四部分:左(工具面板)、中(画布)、右(表单面板)、悬浮(附加操作)
 
@@ -324,6 +324,80 @@ viewer.importXML(xml, function(err) {
     - 放大/缩小/重置 `this.bpmnModeler.get('canvas').zoom(newScale);`
     - 下载 svg `this.bpmnModeler.saveSVG({format: true}, (err, data) => {});`
     - 下载 xml `this.bpmnModeler.saveXML({format: true}, (err, data) => {});`
+    - 点击 xml，获取节点 id
+
+    源码中
+    ```js
+    /**
+     * Register an event listener
+    *
+    * Remove a previously added listener via {@link #off(event, callback)}.
+    *
+    * @param {String} event
+    * @param {Number} [priority]
+    * @param {Function} callback
+    * @param {Object} [that]
+    */
+    Viewer.prototype.on = function(event, priority, callback, target) {
+        return this.get('eventBus').on(event, priority, callback, target);
+    };
+    ```
+
+    元素添加相应事件。比如，点击、悬浮等等
+    ```js
+    import React, {Component, Fragment} from 'react';
+    import BpmnViewer from 'bpmn-js';
+    import {diagramXML} from './xml';
+    import './Bpmn.css';
+
+    class Bpmn extends Component {
+        componentDidMount() {
+            const {callback} = this.props;
+            let viewer = new BpmnViewer({
+                container: '#canvas',
+                // height: 400
+            });
+
+            viewer.importXML(diagramXML, function(err) {
+                if (err) {
+                    console.error('failed to load diagram');
+                    console.error(err);
+                    return console.log('failed to load diagram', err);
+                }
+                let eventBus = viewer.get('eventBus');
+                let events = [
+                    'element.click',
+                    // 'element.dblclick',
+                    // 'element.hover',
+                    // 'element.out',
+                    // 'element.mousedown',
+                    // 'element.mouseup'
+                ];
+                events.forEach(function(event) {
+                    eventBus.on(event, function(e) {
+                        console.log(event, 'on', e.element.id);
+                        callback(e.element.id); // 流程图点击回调
+                    });
+                });
+                // 删除 bpmn logo
+                const bjsIoLogo = document.querySelector('.bjs-powered-by');
+                while (bjsIoLogo.firstChild) {
+                    bjsIoLogo.removeChild(bjsIoLogo.firstChild);
+                }
+            });
+        }
+
+        render() {
+            const {data} = this.props;
+            return (<Fragment>
+                <div id="canvas" style={{height: '100%'}} />
+                <div>{data.id}</div>
+            </Fragment>);
+        }
+    }
+
+    export default Bpmn;
+    ```
 
 ## 遇到的问题
 
@@ -333,6 +407,8 @@ viewer.importXML(xml, function(err) {
 
 ```js
 import entryFactory from 'bpmn-js-properties-panel/lib/factory/EntryFactory';
+import script from 'bpmn-js-properties-panel/lib/provider/camunda/parts/implementation/Script';
+import {query} from 'min-dom';
 
 // 编号
 const BaseInfoProps = (group, element, bpmnFactory, translate) => {
@@ -364,6 +440,51 @@ const BaseInfoProps = (group, element, bpmnFactory, translate) => {
             },
         })
     );
+
+    group.entries.push({
+        id: 'condition',
+        label: translate('Condition'),
+        html: `
+            <div class="bpp-row">
+                <label for="cam-condition">${translate('Expression')}</label>
+                <div class="bpp-field-wrapper">
+                    <input id="cam-condition" type="text" name="condition" placeholder="请输入" />
+                    <button class="clear" data-action="clear" data-show="canClear">
+                        <span>X</span>
+                    </button>
+                </div>
+            </div>
+        `,
+        get: function(element) {
+            let values = {};
+            // ...
+            return values;
+        },
+        set: function(element, values) {
+            let commands = [];
+            // ...
+            return commands;
+        },
+        validate: function(element, values) {
+            let validationResult = {};
+
+            if (!values.condition) {
+                validationResult.condition = '请输入表达式${表达式}';
+            }
+
+            return validationResult;
+        },
+        clear: function(element, inputNode) {
+            query('input[name=condition]', inputNode).value = '';
+            return true;
+        },
+        canClear: function(element, inputNode) {
+            let input = query('input[name=condition]', inputNode);
+            return input.value !== '';
+        },
+        script: script,
+        cssClasses: ['bpp-textfield'],
+    });
 }
 
 export default BaseInfoProps;
@@ -394,6 +515,8 @@ ColorPicker.$inject = [
 ```
 
 * 生成的 xml 位置不能进行调节，但是 `svg` 可以
+
+    ![](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/svg.png)
 
     [关于 viewBox preserveAspectRatio](http://tutorials.jenkov.com/svg/svg-viewport-view-box.html)
 

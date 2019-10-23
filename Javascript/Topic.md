@@ -267,4 +267,32 @@ flatten(arr); // [1, 2, 3, 1, 2, 3, 4, 2, 3, 4]
 * 6.什么叫 `JSFuck`
 [JSFuck](http://www.jsfuck.com) 是一种基于 `JavaScript` 原子部分的深奥而有教育意义的编程风格。它只使用6个不同的字符来编写和执行代码: `[]` `{}` `+` `!`
 
-* 7
+* 7.数组乱序
+
+    - `sort`
+    ```js
+    function mixArray(arr) {
+        return arr.sort(() => Math.random() - 0.5);
+    }
+    ```
+
+    - `Gisher-Yates shuffle` 洗牌算法
+    ```js
+    function mixArray(arr) {
+        let m = arr.length;
+        while(m > 1) {
+            let index = parsetInt(Math.random() * m--);
+            [arr[index], arr[m]] = [arr[m], arr[index]];
+        }
+        return arr;
+    }
+    ```
+
+* 8.正则匹配替换成小驼峰
+
+```js
+let classname = 'abc-acs';
+let reg = /(?<=\w)-([a-z])/g;
+
+classname = classname.replace(reg, RegExp.$1.toUpperCase());
+```
