@@ -30,70 +30,110 @@
 
 ### 请求参数格式
 
-1. `Query String Parameters` 格式： `?key=value&key=value`
+* 1.`Query String Parameters` 格式： `?key=value&key=value`
 
-    参数会以 url string 的形式进行传递，即?后的字符串则为其请求参数，并以&作为分隔符。常用在 GET 请求方式时使用。 其他请求方式也可以使用，拼接在接口地址 `url?` 后面。
+参数会以 url string 的形式进行传递，即?后的字符串则为其请求参数，并以&作为分隔符。常用在 GET 请求方式时使用。 其他请求方式也可以使用，拼接在接口地址 `url?` 后面。
 
-    ![Query String Parameters](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/QueryStringParameter.png)
+![Query String Parameters](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/QueryStringParameter.png)
 
-2. `Form Data` 格式：`key=value&key=value` 键值对形式
+* 2.`Form Data` 格式：`key=value&key=value` 键值对形式
 
-    - 当 `Content-type` 为 `application/x-www-form-urlencoded;charset=utf-8` 时，参数会以 `Form Data` 的形式(数据为 String 键值对格式)传递给接口，并且不会显示在接口 url 上。
+- 当 `Content-type` 为 `application/x-www-form-urlencoded;charset=utf-8` 时，参数会以 `Form Data` 的形式(数据为 String 键值对格式)传递给接口，并且不会显示在接口 url 上。
 
-    ```js
-    let data = {
-        username: 'wqjiao',
-        password: '111111',
+```js
+let data = {
+    username: 'wqjiao',
+    password: '111111',
+}
+xhr.send(QS.stringify(data));
+```
+![Form Data](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/FormData.png)
+
+- 对表单提交和文件上传时做特殊处理，需要使用 `new FormData()` 方法处理后传递给接口，`Content-type` 为 `multipart/form-data; boundary=----WebKitFormBoundarys9jOoKcA1Kwn9sYS` 格式。
+
+```js
+const formData = new FormData();
+formData.append('label', 'ID_photo-front');
+formData.append('subId', 'fa6abb94000a4ba1b19a43e60eba1516');
+formData.append('file', fileList[0]);
+
+fetch('http://192.168.1.128:5022/tool/file/upload', {
+    method: 'POST',
+    headers: {
+        'Authorization': '89199cf3294520765904d47c2c570c1b',
+    },
+    body: formData,
+    cridentials: 'include',
+    mode: 'no-cors',
+    processData: false,
+    cache: false,
+    contentType: false,
+});
+```
+
+![FormData：multipart/form-data](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/FormData_file.png)
+
+- 补充说明
+
+    1. `服务器为什么会对表单提交和文件上传做特殊处理，因为表单提交数据是名值对的方式，且Content-Type为application/x-www-form-urlencoded,而文件上传服务器需要特殊处理，普通的post请求（Content-Type不是application/x-www-form-urlencoded）数据格式不固定，不一定是名值对的方式，所以服务器无法知道具体的处理方式，所以只能通过获取原始数据流的方式来进行解析。`
+    2. processData: false --> 因为 data 值是 `formdata` 对象，不需要对数据做处理。
+    3. cache: false --> 上传文件不需要缓存。
+    4. contentType: false --> 因为是由 `<form>` 表单构造的 `FormData` 对象，且已经声明了属性 `enctype="multipart/form-data"`，所以这里设置为 false。
+    5. xhrFields: { withCredentials: true }, 跨域请求设置
+
+* 3.`Request Payload` 格式：`{key: value, key: value}` (后端经过反序列化得到对象)
+
+当 `Content-type` 为 `application/json;charset=utf-8` 时，参数会以 `Request Payload` 的形式(数据为 json 格式)传递给接口，并且不会显示在接口 url 上。
+
+```js
+let data = {
+    username: 'wqjiao',
+    password: '111111',
+}
+xhr.send(JSON.stringify(data));
+```
+
+![Request Payload](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/RequestPayload.png)
+
+```js
+let Ajax = {
+    get: function (url, fn) {
+        // XMLHttpRequest对象用于在后台与服务器交换数据   
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            // readyState == 4说明请求已完成
+            if (xhr.readyState == 4 && xhr.status == 200 || xhr.status == 304) {
+                // 从服务器获得数据 
+                fn.call(this, xhr.responseText);
+            }
+        };
+        xhr.send();
+    },
+    // data 应为'a=a1&b=b1'这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式
+    post: function (url, data, fn) {
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        // xhr.open("POST", '/response.json', true);
+        xhr.setRequestHeader('Accept', 'application/json')
+        xhr.setRequestHeader('Authorization', 'bb850ec168d55eedcb0b47ac4e7c9d6b')
+        // 添加http头，发送信息至服务器时内容编码类型
+        xhr.setRequestHeader("Content-Type", "application/json");
+        // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 304)) {
+                fn.call(this, xhr.responseText);
+            }
+        };
+
+        // application/json 格式：{key: value, key: value}
+        xhr.send(JSON.stringify(data));
+        // application/x-www-form-urlencoded 格式：key=value&key=value
+        // xhr.send(Qs.stringify(data));
     }
-    xhr.send(JSON.stringify(data));
-    ```
-    ![Form Data](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/FormData.png)
-
-    - 对表单提交和文件上传时做特殊处理，需要使用 `new FormData()` 方法处理后传递给接口，`Content-type` 为 `multipart/form-data; boundary=----WebKitFormBoundarys9jOoKcA1Kwn9sYS` 格式。
-
-    ```js
-    const formData = new FormData();
-    formData.append('label', 'ID_photo-front');
-    formData.append('subId', 'fa6abb94000a4ba1b19a43e60eba1516');
-    formData.append('file', fileList[0]);
-
-    fetch('http://192.168.1.128:5022/tool/file/upload', {
-        method: 'POST',
-        headers: {
-            'Authorization': '89199cf3294520765904d47c2c570c1b',
-        },
-        body: formData,
-        cridentials: 'include',
-        mode: 'no-cors',
-        processData: false,
-        cache: false,
-        contentType: false,
-    });
-    ```
-
-    ![FormData：multipart/form-data](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/FormData_file.png)
-
-    - 补充说明
-
-        1. `服务器为什么会对表单提交和文件上传做特殊处理，因为表单提交数据是名值对的方式，且Content-Type为application/x-www-form-urlencoded,而文件上传服务器需要特殊处理，普通的post请求（Content-Type不是application/x-www-form-urlencoded）数据格式不固定，不一定是名值对的方式，所以服务器无法知道具体的处理方式，所以只能通过获取原始数据流的方式来进行解析。`
-        2. processData: false --> 因为 data 值是 `formdata` 对象，不需要对数据做处理。
-        3. cache: false --> 上传文件不需要缓存。
-        4. contentType: false --> 因为是由 `<form>` 表单构造的 `FormData` 对象，且已经声明了属性 `enctype="multipart/form-data"`，所以这里设置为 false。
-        5. xhrFields: { withCredentials: true }, 跨域请求设置
-
-3. `Request Payload` 格式：`{key: value, key: value}` (后端经过反序列化得到对象)
-
-    当 `Content-type` 为 `application/json;charset=utf-8` 时，参数会以 `Request Payload` 的形式(数据为 json 格式)传递给接口，并且不会显示在接口 url 上。
-
-    ```js
-    let data = {
-        username: 'wqjiao',
-        password: '111111',
-    }
-    xhr.send(Qs.stringify(data));
-    ```
-
-    ![Request Payload](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/RequestPayload.png)
+}
+```
 
 ### new FormData(form)
 
