@@ -11,7 +11,7 @@ tags: Javascript
 ## 起初
 
 后端有一套自己的流程引擎，解析相应的 `xml`，然后部署业务流程。
-起初后端是想直接用 [activiti-designeer](https://www.activiti.org/before-you-start) 做流程设计，该方法基本满足业务需求，但后期发现这样做太麻烦，于是推荐前端使用 [BPMN插件](https://github.com/bpmn-io/bpmn-js)，放在管理系统中使用，生成 `xml` 及 `svg` 字符串传给接口，保存该业务流程。
+起初后端是想直接用 [activiti-designeer](https://www.activiti.org/before-you-start) 做流程设计，该方法基本满足业务需求，但后期发现这样做太麻烦，于是推荐前端使用 [BPMN插件](https://github.com/bpmn-io/bpmn-js)，放在管理系统中使用，生成 `xml` 及 `svg` 字符串传给接口，保存该业务流程。[官方实例](https://demo.bpmn.io/s/start)
 
 ## 基本用法
 
@@ -45,9 +45,10 @@ viewer.importXML(xml, function(err) {
 ## React 中用法
 
 使用了 [ant-design-pro](https://pro.ant.design/) 最初搭建好的后台项目(非 ts 版本) 搭建的项目：
-[BPMN React 例子](https://github.com/wqjiao/bpmn-activiti)
+[BPMN React 例子](https://github.com/wqjiao/bpmn-activiti)，更多关注 [思否](https://segmentfault.com/a/1190000020723731)
 
 ![](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/BPMN.png)
+![](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/BPMN.gif)
 
 流程设计的界面按照图片上的布局可以分成四部分:左(工具面板)、中(画布)、右(表单面板)、悬浮(附加操作)
 
