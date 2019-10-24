@@ -516,35 +516,37 @@ ColorPicker.$inject = [
 
 * 生成的 xml 位置不能进行调节，但是 `svg` 可以
 
-    ![](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/svg.png)
+![](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/svg.png)
 
-    [关于 viewBox preserveAspectRatio](http://tutorials.jenkov.com/svg/svg-viewport-view-box.html)
+[关于 viewBox preserveAspectRatio](http://tutorials.jenkov.com/svg/svg-viewport-view-box.html)
 
-    - `viewBox="x, y, width, height"`
+- `viewBox="x, y, width, height"`
 
-    更形象的解释就是：`SVG` 就像是我们的显示器屏幕，`viewBox` 就是截屏工具选中的那个框框，最终的呈现就是把框框中的截屏内容再次在显示器中全屏显示！
+更形象的解释就是：`SVG` 就像是我们的显示器屏幕，`viewBox` 就是截屏工具选中的那个框框，最终的呈现就是把框框中的截屏内容再次在显示器中全屏显示！
 
-    - `preserveAspectRatio="xMinYMin meet"`
+- `preserveAspectRatio="xMinYMin meet"`
 
-    `preserveAspectRatio` 属性的值为空格分隔的两个值组合而成。例如，上面的 `xMidYMid` 和 `meet`.
+`preserveAspectRatio` 属性的值为空格分隔的两个值组合而成。例如，上面的 `xMidYMid` 和 `meet`.
 
-    第1个值表示, `viewBox` 如何与` SVG viewport `对齐; 
-    其中，第1个值又是由两部分组成的。前半部分表示x方向对齐，后半部分表示y方向对齐
+第1个值表示, `viewBox` 如何与` SVG viewport `对齐; 
+其中，第1个值又是由两部分组成的。前半部分表示x方向对齐，后半部分表示y方向对齐
 
-    | -- 值 -- | -- 含义 -- |
-    | xMin | viewport 和 viewBox左边对齐 |
-    | xMid | viewport 和 viewBox x轴中心对齐 |
-    | xMax | viewport 和 viewBox右边对齐 |
-    | YMin | viewport 和 viewBox上边缘对齐。注意Y是大写。 |
-    | YMid | viewport 和 viewBox y轴中心点对齐。注意Y是大写。 |
-    | YMax | viewport 和 viewBox下边缘对齐。注意Y是大写。 |
+| -- 值 -- | -- 含义 -- |
+| -------- | --------- |
+| xMin | viewport 和 viewBox左边对齐 |
+| xMid | viewport 和 viewBox x轴中心对齐 |
+| xMax | viewport 和 viewBox右边对齐 |
+| YMin | viewport 和 viewBox上边缘对齐。注意Y是大写。 |
+| YMid | viewport 和 viewBox y轴中心点对齐。注意Y是大写。 |
+| YMax | viewport 和 viewBox下边缘对齐。注意Y是大写。 |
 
-    第2个值表示，如何维持高宽比（如果有）。
+第2个值表示，如何维持高宽比（如果有）。
 
-    | -- 值 -- | -- 含义 -- |
-    | meet | 保持纵横比缩放viewBox适应viewport | 
-    | slice | 保持纵横比同时比例小的方向放大填满viewport | 
-    | none | 扭曲纵横比以充分适应viewport，变态 | 
+| -- 值 -- | -- 含义 -- |
+| -------- | --------- |
+| meet | 保持纵横比缩放viewBox适应viewport | 
+| slice | 保持纵横比同时比例小的方向放大填满viewport | 
+| none | 扭曲纵横比以充分适应viewport，变态 | 
 
 ## 网址
 
