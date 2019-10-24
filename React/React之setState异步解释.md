@@ -6,7 +6,7 @@
 
 [React 源码](https://github.com/facebook/react/blob/18d2e0c03e4496a824fdb7f89ea2a3d60c30d49a/packages/react/src/ReactBaseClasses.js)，`setState` 中传入两个参数 `partialState, callback`：
 
-![setState 部分源码](../assets/setState.png)
+![setState 部分源码](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/setState.png)
 
 * `partialState` 在字面意思理解应该是部分状态，注释说明是这样的 ` Next partial state or function to produce next partial state to be merged with current state.`,大概翻译是 `下一个部分状态或函数，以产生下一个要与当前状态合并的部分状态。`。实际上，在项目中 `this.setState({})` 更新指定 `state` 时，其他的 `state` 与当前更新的 `state` 做了合并。
 
@@ -17,16 +17,16 @@
 首先调用了 `invariant()`, 其次调用了 `this.updater.enqueueSetState()`
 
 `/packages/shared/invariant.js`, 这个方法就是判断 `partialState` 的类型是否正确，抛出错误，附上源码：
-![](../assets/invariant.png)
+![](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/invariant.png)
 
 但是在 V16.7.0版本之前 `invariant` 抛出的是不同类型的错误:
-![](../assets/invariantV16.7.0.png)
+![](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/invariantV16.7.0.png)
 
 `/packages/react-dom/src/server/ReactPartialRenderer.js`,把即将更新的 `state` push 到了 `queue` 中，在 `new Component` 时，将 `updater` 传进去，附上源码：
-![](../assets/enqueueSetState.png)
+![](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/enqueueSetState.png)
 
 `queue` 应该是 `React` 提升性能的关键。因为并不是每次调用 `setState`, `React` 都会立马更新，而是每次调用 `setState`, `React` 只是将其 push 到了待更新的 `queue` 中，附上源码：
-![](../assets/queue.png)
+![](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/queue.png)
 
 `/packages/react-reconciler/src/ReactFiberClassComponent.js` 中的 `enqueueSetState`;
 

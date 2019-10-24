@@ -8,7 +8,9 @@
 
 常见的媒体格式：
 
-| 媒体格式 | 描述 |
+![媒体格式](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/media-type.png)
+
+<!-- | 媒体格式 | 描述 |
 | :-------------------------------- | :--------- |
 | text/html                         |  HTML格式  |
 | text/plain                        | 纯文本格式，不包含任何控件或格式字符  |
@@ -24,7 +26,7 @@
 | application/msword                |  Word文档格式  |
 | application/octet-stream          |  二进制流数据（如常见的文件下载）  |
 | application/x-www-form-urlencoded |  默认的encType，form 表单数据被编码为 key/value 格式发送到服务器（表单默认的提交数据的格式）。数据被编码为名称/值对。这是标准的编码格式。  |
-| multipart/form-data               | 数据被编码为一条消息，页上的每个控件对应消息中的一个部分，用在上传文件: Content-Type: multipart/form-data; boundary=----WebKitFormBoundarys9jOoKcA1Kwn9sYS  |
+| multipart/form-data               | 数据被编码为一条消息，页上的每个控件对应消息中的一个部分，用在上传文件: Content-Type: multipart/form-data; boundary=----WebKitFormBoundarys9jOoKcA1Kwn9sYS  | -->
 
 ### 请求参数格式
 
@@ -32,7 +34,7 @@
 
     参数会以 url string 的形式进行传递，即?后的字符串则为其请求参数，并以&作为分隔符。常用在 GET 请求方式时使用。 其他请求方式也可以使用，拼接在接口地址 `url?` 后面。
 
-    ![Query String Parameters](../assets/QueryStringParameter.png)
+    ![Query String Parameters](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/QueryStringParameter.png)
 
 2. `Form Data` 格式：`key=value&key=value` 键值对形式
 
@@ -45,7 +47,7 @@
     }
     xhr.send(JSON.stringify(data));
     ```
-    ![Form Data](../assets/FormData.png)
+    ![Form Data](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/FormData.png)
 
     - 对表单提交和文件上传时做特殊处理，需要使用 `new FormData()` 方法处理后传递给接口，`Content-type` 为 `multipart/form-data; boundary=----WebKitFormBoundarys9jOoKcA1Kwn9sYS` 格式。
 
@@ -69,7 +71,7 @@
     });
     ```
 
-    ![FormData：multipart/form-data](../assets/FormData_file.png)
+    ![FormData：multipart/form-data](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/FormData_file.png)
 
     - 补充说明
 
@@ -91,7 +93,7 @@
     xhr.send(Qs.stringify(data));
     ```
 
-    ![Request Payload](../assets/RequestPayload.png)
+    ![Request Payload](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/RequestPayload.png)
 
 ### new FormData(form)
 
