@@ -19,9 +19,13 @@ tags: Javascript
 
 ```
 yarn add bpmn-js
-yarn add bpmn-js-properties-panel
-yarn add camunda-bpmn-moddle
+yarn add bpmn-js-properties-panel // bpmn-js的属性面板扩展，增加了编辑属性(通用属性和Camunda属性)的能力
+yarn add camunda-bpmn-moddle // 该项目将BPMN 2.0的Camunda命名空间扩展定义为一个moddle描述符。
 ```
+
+- [bpmn-js](https://github.com/bpmn-io/bpmn-js)
+- [bpmn-js-properties-panel](https://github.com/bpmn-io/bpmn-js-properties-panel)
+- [camunda-bpmn-moddle](https://github.com/camunda/camunda-bpmn-moddle)
 
 * 初始化
 
@@ -327,7 +331,6 @@ viewer.importXML(xml, function(err) {
     - 下载 xml `this.bpmnModeler.saveXML({format: true}, (err, data) => {});`
     - 点击 xml，获取节点 id
 
-    源码中
     ```js
     /**
      * Register an event listener
@@ -463,7 +466,7 @@ const BaseInfoProps = (group, element, bpmnFactory, translate) => {
         },
         set: function(element, values) {
             let commands = [];
-            // ...
+            // ... cmdHelper.updateBusinessObject
             return commands;
         },
         validate: function(element, values) {
@@ -551,10 +554,9 @@ ColorPicker.$inject = [
 | slice | 保持纵横比同时比例小的方向放大填满viewport | 
 | none | 扭曲纵横比以充分适应viewport，变态 | 
 
-## 网址
+## 更多网址
 
 * [BPMN官网](https://bpmn.io/toolkit/bpmn-js/)
-* [BPMN Github](https://github.com/bpmn-io/bpmn-js)
 * [BPMN 实例](https://github.com/bpmn-io/bpmn-js-examples)
 * [BPMN React 例子](https://github.com/wqjiao/bpmn-activiti)
 * [BPMN 其他例子](https://github.com/imdwpeng/bpmn-editor)

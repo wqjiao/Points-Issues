@@ -296,3 +296,19 @@ let reg = /(?<=\w)-([a-z])/g;
 
 classname = classname.replace(reg, RegExp.$1.toUpperCase());
 ```
+
+* 9.
+
+```js
+function fn() {
+	var i = 10;
+	return function (n) {
+		console.log(n+(++i))
+	}
+}
+var f = fn();
+f(10);
+f(20);
+fn()(10);
+fn()(20);
+```
