@@ -545,6 +545,7 @@ ColorPicker.$inject = [
 第2个值表示，如何维持高宽比（如果有）。
 
 | -- 值 -- | -- 含义 -- |
+| -------- | --------- |
 | meet | 保持纵横比缩放viewBox适应viewport | 
 | slice | 保持纵横比同时比例小的方向放大填满viewport | 
 | none | 扭曲纵横比以充分适应viewport，变态 | 
