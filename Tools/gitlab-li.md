@@ -44,7 +44,7 @@ build:
     - export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
     - yarn install
     - yarn build
-    - qshell qupload -c 5 /home/workspaces/qshell-upload/fezz-whsp.json
+    - qshell qupload -c 5 /home/workspaces/qshell-upload/xxx.json
     - sudo rm -rf `ls ./dist/** | grep -v index.html`
     - echo '根据以下拼接规则，获得线上文件七牛地址'
     - echo '七牛地址拼接规则 ：【https://xxx.com/dist/】+【文件相对路径】'
@@ -77,7 +77,7 @@ build:
 #     - date +"%k:%M:%S"
 #     - yarn build
 #     - date +"%k:%M:%S"
-#     # - qshell qupload -c 5 /home/workspaces/qshell-upload/fezz-whsp.json
+#     # - qshell qupload -c 5 /home/workspaces/qshell-upload/xxx.json
 #     - sudo rm -rf `ls ./dist/** | grep -v index.html`
 #     - echo '根据以下拼接规则，获得线上文件七牛地址'
 #     - echo '七牛地址拼接规则 ：【http://xxx.com/dist/】+【文件相对路径】'

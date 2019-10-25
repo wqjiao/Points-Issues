@@ -51,7 +51,7 @@ class SetState extends React.Component {
     
     increment = () => {
         this.setState({ val: this.state.val + 1 })
-        console.log('合成方法:', this.state.val) // 输出的是更新前的val --> 0
+        console.log('合成方法:', this.state.val) // 输出的是更新前的val --> 1
     }
 
     render() {

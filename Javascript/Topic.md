@@ -297,7 +297,7 @@ let reg = /(?<=\w)-([a-z])/g;
 classname = classname.replace(reg, RegExp.$1.toUpperCase());
 ```
 
-* 9.
+* 9.闭包题
 
 ```js
 function fn() {
