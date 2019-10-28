@@ -7,10 +7,51 @@
 
 ## React 生命周期
 
+![](../assets/lifecycle.png)
+
 * constructor() 构造函数
+
+```js
+constructor(props) {
+    super(props);
+    this.state = {}
+}
+```
+
 * static getDerivedStateFromProps() 初始挂载及后续更新时都会被调用，返回对象来更新 state，返回 null 表示不更新
+
+```JS
+static getDerivedStateFromProps(nextProps) {
+    if ('value' in nextProps) {
+        return {
+            ...(nextProps.value || {})
+        }
+    }
+    return null; // 返回 null，表示不更新
+}
+```
+
 * render() 组件挂载DOM
+
+```js
+render () {
+    return <Fragment></Fragment>
+}
+```
+
 * componentDidMount() 组件挂载后执行
+
+```js
+componentDidMount() {
+    // ...
+}
+```
+
+* shouldComponentUpdate() 在渲染执行之前执行，默认返回 true，表示更新
+
+* componentDidUpdate() 组件更新前执行，组件首次渲染时不执行
+
+* componentWillUnmount() 组件卸载时执行，可停止定时器/清空 redux 数据
 
 ## 执行顺序
 
