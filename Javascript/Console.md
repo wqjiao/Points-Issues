@@ -6,7 +6,7 @@
 
 使用占位符 %c 自定义打印标题的样式，一眼看出自己打印的日志：
     
-    console.log("%c 车300", 'color: red; background: #000');
+    console.log("%c 车", 'color: red; background: #000');
 
 ## 2、console.info
 
@@ -85,7 +85,7 @@
 
 返回最近一次表达式执行的结果，功能跟按向上的方向键再回车是一样的
 
-## 参考链接
+## 网址
     
 * [Web/API/console](https://developer.mozilla.org/en-US/docs/Web/API/console)
 

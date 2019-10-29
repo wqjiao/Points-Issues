@@ -17,7 +17,7 @@
 </div>
 ```
 
-四种方式实现页面布局:
+## 四种方式实现页面布局
 
 ```css
 * {
@@ -138,3 +138,113 @@ ul li:nth-of-type(2n)::after {
     content: '|';
 }
 ```
+
+## 汇总
+
+* 方式一 `absolute && translate`
+
+```css
+.parent {
+    position: relative;
+}
+.son {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+```
+
+* 方式二 `absolute`
+
+```css
+.parent {
+    position: relative;
+}
+.son {
+    position: absolute;
+    margin: auto;
+    width: 100px;
+    height: 50px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+```
+
+* 方式三 `table && table-cell`
+
+```css
+.parent {
+    display: table;
+    width: 100%;
+    height: 50px;
+}
+.son {
+    display: table-cell;
+    vertical-align: middle;
+}
+```
+
+* 方式四
+
+```css
+.parent {
+    display: flex;
+} 
+.son {
+    margin: auto;
+}
+```
+
+或
+
+```css
+.parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+```
+
+或
+
+```css
+.parent {
+    display: flex;
+    justify-content: center;
+}
+.son {
+    align-self: center;
+}
+```
+
+* 方式五
+
+```css
+.parent {
+    display: grid;
+}
+.son {
+    justify-self: center; 
+    align-self: center;
+}
+```
+
+* 方式六
+
+````css
+.parent {
+    position: relative;
+}
+/* 无需知道被居中元素的宽高 */
+.son  {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+````

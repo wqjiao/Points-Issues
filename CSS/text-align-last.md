@@ -127,6 +127,6 @@ auto | start | end | left | right | center | justify
 
     最后一行文字的开头语内容盒子的左侧对齐，末尾与右侧对齐。
 
-* 浏览器兼容性
+* [浏览器兼容性](https://caniuse.com/#search=text-align-last)
 
-![](../assets/text-align-last-can-i-use.png)
+![](https://raw.githubusercontent.com/wqjiao/Points-Issues/master/assets/text-align-last-can-i-use.png)

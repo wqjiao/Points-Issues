@@ -1,6 +1,6 @@
 # moment.js 时间处理插件
 
-创建
+* 创建
 ```javascript
 moment() // 当前时间
 moment("1995-12-25") // 1995-12-25
@@ -10,19 +10,19 @@ moment(Date.now() - 24 * 60 * 60 * 1000) // 昨天
 moment(new Date(2011, 9, 16)) // 2011-10-16
 ```
 
-格式化
+* 格式化
 ```javascript
 moment().format('YYYY年MM月DD日 HH:mm:ss') // 2016年11月11日 22:05:19
 moment().format('hh:m:ss') // 10:5:19
 moment().format('[YYYY]') // "YYYY"。[] 里的会原样输出。
 ```
 
-转化成 Date 对象
+* 转化成 Date 对象
 ```javascript
 moment().toDate()
 ```
 
-获取/设置时间信息
+* 获取/设置时间信息
 ```javascript
 moment().second() //获得 秒
 moment().second(Number) //设置 秒。0 到 59
@@ -30,7 +30,7 @@ moment().minute() //获得 分
 moment().minute(Number) //设置 分。0 到 59
 ```
 
-// 类似的用法
+* 类似的用法
 ```javascript
 moment().hour() // 小时
 moment().date() // 一个月里的第几天
@@ -43,7 +43,7 @@ moment().year() // 年
 moment().daysInMonth() // 当前月有多少天
 ```
 
-操作
+* 操作
 ```javascript
 moment().add(7, 'days') // 之后的第7天。第2个参数还可以是 'months', 'years' 等。注意是复数。
 moment().add(7, 'd'）// 与上面一行代码的运行结果一样。
@@ -71,11 +71,10 @@ moment().toArray() // [2019, 0, 23, 18, 27, 57, 58]
 // 返回一个包含年、月、日、小时、分钟、秒、毫秒的对象
 moment().toObject() // {date: 23, hours: 18, milliseconds: 827, minutes: 29, months: 0, seconds: 57, years: 2019}
 
-// 
-moment().toString() // 
+moment().toString()
 ```
 
-查询，若需要颗粒度细分，第二个参数表示精度，可以查询 年、月、日
+* 查询，若需要颗粒度细分，第二个参数表示精度，可以查询 年、月、日
 ```javascript
 // 早于
 moment('2019-01-20').isBefore('2019-01-21') // true
@@ -108,32 +107,40 @@ moment([2011, 2, 12]).isDST(); // false, March 12 2011 is not DST
 moment([2011, 2, 14]).isDST(); // true, March 14 2011 is DST
 ```
 
-是否是闰年
+* 是否是闰年
 ```javascript
 moment().isLeapYear()
 ```
 
-转换日期语言
+* 转换日期语言
 ```javascript
 moment.locale('zh-cn')
 ```
 
+* 获取前6天的时间段
+
 ```js
-if (type === 'day') {
-    date = moment().set({hour: 0, minute: 0, second: 0});
-} else if (type === 'week') {
-    date = moment()
-        .set({hour: 0, minute: 0, second: 0})
-        .subtract(6, 'days');
-} else if (type === 'month') {
-    date = moment()
-        .set({hour: 0, minute: 0, second: 0})
-        .subtract(29, 'days');
+function getDateRange(type) {
+    let date;
+
+    if (type === 'day') {
+        date = moment().set({hour: 0, minute: 0, second: 0});
+    } else if (type === 'week') {
+        date = moment()
+            .set({hour: 0, minute: 0, second: 0})
+            .subtract(6, 'days');
+    } else if (type === 'month') {
+        date = moment()
+            .set({hour: 0, minute: 0, second: 0})
+            .subtract(29, 'days');
+    }
+    let endTime = moment()
+        .set({hour: 23, minute: 59, second: 59})
+        .format('YYYY-MM-DD HH:mm:ss');
+    let beginTime = date.format('YYYY-MM-DD HH:mm:ss');
+
+    return {beginTime, endTime}
 }
-let endTime = moment()
-    .set({hour: 23, minute: 59, second: 59})
-    .format('YYYY-MM-DD HH:mm:ss');
-let beginTime = date.format('YYYY-MM-DD HH:mm:ss');
 ```
 
-[moment 官网](http://momentjs.com/docs/#/query/is-after/)
+* [moment 官网](http://momentjs.com/docs/#/query/is-after/)
