@@ -1348,3 +1348,10 @@ for (var i = 0; i < 4; i++) {
 ```
 
 因为 `let i` 的是区块变量，每个 `i` 只能存活到大括号结束，并不会把后面的 `for` 循环的 `i` 值赋给前面的 `setTimeout` 中的 `i`;而 `var i` 则是局部变量，这个 `i` 的生命周期不受 `for` 循环的大括号限制;
+
+## 38.动态替换 favicon.ico 图片
+
+```js
+let link = document.getElementById('favicon');
+link.href = "https://assets.che300.com/feimg/incoming/loginLogo.png";
+```
