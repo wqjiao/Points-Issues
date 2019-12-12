@@ -1355,3 +1355,70 @@ for (var i = 0; i < 4; i++) {
 let link = document.getElementById('favicon');
 link.href = "https://assets.che300.com/feimg/incoming/loginLogo.png";
 ```
+
+## 39.替换对象中 key 名称
+
+`let values = {create_time: '2019-12-10', name: 'wqjiao', ... };`
+
+* 方式一：声明一个对象存储空间，向对象中赋值
+    缺点：需要遍历；声明了一个多余的存储空间；对象中的值很多时，赋值操作过多；
+
+    ```js
+    // 1：遍历
+    let params = {};
+    Object.keys(values).map(item => {
+        if (item === 'create_time') {
+            params.createTime = item;
+        } else {
+            params = {
+                ...params,
+                item,
+            }
+        }
+        // ...
+    });
+
+    // 2:直接赋值
+    let params = {
+        createTime: values.create_time,
+        name: values.name,
+        // ...
+    };
+
+    console.log(params);
+    ```
+
+* 方式二：简单粗暴 `delete`
+
+```js
+values.createTime = values.create_time;
+delete values.create_time;
+
+console.log(values);
+```
+
+* 方式三：`JSON.stringfy()` 序列化替换
+
+![JSON.stringfy](../assets/JSON.stringfy.png)
+
+```js
+const mapObj = {
+  created_time: 'createdTime'
+};
+JSON.parse(
+  JSON.stringify(values).replace(/created_time/gi, matched => mapObj[matched])
+);
+```
+
+## 40.将 字符串 '1000000000' 转换成 '1,000,000,000'
+
+```js
+// 德国以 . 分割金钱, 转到德国当地格式化方案即可
+1000000000..toLocaleString('de-DE') 
+
+// 寻找字符空隙加 .
+'1000000000'.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+// 寻找数字并在其后面加 . 
+'1000000000'.replace(/(\d)(?=(\d{3})+\b)/g, '$1,')
+```
