@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img {
+            display: block;
+            margin: 100px;
+        }
+    </style>
+</head>
+    <img src="./liyu_icon_br_a.png" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+    <img src="./liyu_icon_br_a.png" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+    <img src="./liyu_icon_br_a.png" data-src="http://ww1.sinaimg.cn/large/006y8mN6gw1fa7kaed2hpj30sg0l9q54.jpg" alt="">
+    <img src="./liyu_icon_br_a.png" data-src="http://ww1.sinaimg.cn/large/006y8mN6gw1fa7kaed2hpj30sg0l9q54.jpg" alt="">
+    <img src="./liyu_icon_br_a.png" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+    <img src="./liyu_icon_br_a.png" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+    <img src="./liyu_icon_br_a.png" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+    <img src="./liyu_icon_br_a.png" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+    <img src="./liyu_icon_br_a.png" data-src="http://ww1.sinaimg.cn/large/006y8mN6gw1fa7kaed2hpj30sg0l9q54.jpg" alt="">
+    <img src="./liyu_icon_br_a.png" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+    <img src="./liyu_icon_br_a.png" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
+
+    <script>
+        function throttle(fun, delay, time) {
+            var timeout,
+                startTime = new Date();
+
+        return function() {
+                var context = this,
+                    args = arguments,
+                    curTime = new Date();
+
+                clearTimeout(timeout);
+                // 如果达到了规定的触发时间间隔，触发 handler
+                if (curTime - startTime >= time) {
+                    fun.apply(context, args);
+                    startTime = curTime;
+                    // 没达到触发间隔，重新设定定时器
+                } else {
+                    timeout = setTimeout(fun, delay);
+                }
+            };
+    };
+    // 实际想绑定在 scroll 事件上的 handler
+    function lazyload(event) {
+        
+        var imgNum = document.getElementsByTagName('img').length;
+        var img = document.getElementsByTagName("img");
+        var n = 0; //存储图片加载到的位置，避免每次都从第一张图片开始遍历
+        console.log(imgNum)
+        for (var i = n; i < imgNum; i++) {
+            if (img.eq(i).offset().top < parseInt($(window).height()) + parseInt($(window).scrollTop())) {
+                debugger
+                if (img.eq(i).attr("src") == "./liyu_icon_br_a.png") {
+                    var src = img.eq(i).attr("data-src");
+                    img.eq(i).attr("src", src);
+
+                    n = i + 1;
+                }
+            }
+        }
+    }
+    // 采用了节流函数
+    window.addEventListener('scroll', throttle(lazyload,500,1000));
+    </script>
+</body>
+</html>
