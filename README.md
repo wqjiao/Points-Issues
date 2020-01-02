@@ -39,3 +39,7 @@
 35. [map、filter、reduce分别有什么作用](https://github.com/wqjiao/Points-Issues/issues/35)
 36. [深拷贝与浅拷贝的区别](https://github.com/wqjiao/Points-Issues/issues/36)
 37. [动态替换 favicon.ico 图片](https://github.com/wqjiao/Points-Issues/issues/37)
+38. [substr、substring 及 slice 区别](https://github.com/wqjiao/Points-Issues/issues/38)
+
+
+<!-- tagcanvas 只做抽奖功能 -->

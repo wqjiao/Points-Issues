@@ -508,7 +508,6 @@ delete arr[1]  //['a', ,'c','d']
 
 ## 10.js 字符串截取
 
-
 string str = "123abc456";
 int i = 3;
 
@@ -1356,7 +1355,20 @@ let link = document.getElementById('favicon');
 link.href = "https://assets.che300.com/feimg/incoming/loginLogo.png";
 ```
 
-## 39.替换对象中 key 名称
+## 39.将 字符串 '1000000000' 转换成 '1,000,000,000'
+
+```js
+// 德国以 . 分割金钱, 转到德国当地格式化方案即可
+1000000000..toLocaleString('de-DE') 
+
+// 寻找字符空隙加 .
+'1000000000'.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+// 寻找数字并在其后面加 . 
+'1000000000'.replace(/(\d)(?=(\d{3})+\b)/g, '$1,')
+```
+
+## 40.替换对象中 key 名称
 
 `let values = {create_time: '2019-12-10', name: 'wqjiao', ... };`
 
@@ -1410,17 +1422,26 @@ JSON.parse(
 );
 ```
 
-## 40.将 字符串 '1000000000' 转换成 '1,000,000,000'
+## 41.substr、substring 及 slice 区别
 
-```js
-// 德国以 . 分割金钱, 转到德国当地格式化方案即可
-1000000000..toLocaleString('de-DE') 
+* `substr(begin, length)` 从指定位置 `begin` 取指定长度 `length` 的字符串
 
-// 寻找字符空隙加 .
-'1000000000'.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+* `substring(begin, end)` 截取最小值与最大值位置之间的字符串，不接受负数参数(负数直接转换成 0)
 
-// 寻找数字并在其后面加 . 
-'1000000000'.replace(/(\d)(?=(\d{3})+\b)/g, '$1,')
+* `slice(begin, end)` 提取指定 开始 到 结束 位置元素的新数组，参数为负数时，表示从最后一位开始
+
+## 42.罗马数字
+
+罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。
+```
+字符          数值
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
 ```
 
-## 41.tagcanvas 只做抽奖功能
+例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。
