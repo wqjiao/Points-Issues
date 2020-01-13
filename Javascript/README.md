@@ -1355,7 +1355,16 @@ let link = document.getElementById('favicon');
 link.href = "https://assets.che300.com/feimg/incoming/loginLogo.png";
 ```
 
-## 39.将 字符串 '1000000000' 转换成 '1,000,000,000'
+## 39.substr、substring 及 slice 区别
+
+* `substr(begin, length)` 从指定位置 `begin` 取指定长度 `length` 的字符串
+
+* `substring(begin, end)` 截取最小值与最大值位置之间的字符串，不接受负数参数(负数直接转换成 0)
+
+* `slice(begin, end)` 提取指定 开始 到 结束 位置元素的新数组，参数为负数时，表示从最后一位开始
+
+
+## 40.将 字符串 '1000000000' 转换成 '1,000,000,000'
 
 ```js
 // 德国以 . 分割金钱, 转到德国当地格式化方案即可
@@ -1368,7 +1377,7 @@ link.href = "https://assets.che300.com/feimg/incoming/loginLogo.png";
 '1000000000'.replace(/(\d)(?=(\d{3})+\b)/g, '$1,')
 ```
 
-## 40.替换对象中 key 名称
+## 41替换对象中 key 名称
 
 `let values = {create_time: '2019-12-10', name: 'wqjiao', ... };`
 
@@ -1421,14 +1430,6 @@ JSON.parse(
   JSON.stringify(values).replace(/created_time/gi, matched => mapObj[matched])
 );
 ```
-
-## 41.substr、substring 及 slice 区别
-
-* `substr(begin, length)` 从指定位置 `begin` 取指定长度 `length` 的字符串
-
-* `substring(begin, end)` 截取最小值与最大值位置之间的字符串，不接受负数参数(负数直接转换成 0)
-
-* `slice(begin, end)` 提取指定 开始 到 结束 位置元素的新数组，参数为负数时，表示从最后一位开始
 
 ## 42.罗马数字
 

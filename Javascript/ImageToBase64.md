@@ -31,12 +31,14 @@ function getDataUri(url) {
         image.src = url;
 
         image.onload = function () {
-            let canvas = document.createElement('canvas');
+            let canvas = document.createElement('canvas'),
+                width = image.width, // canvas的尺寸和图片一样
+                height = image.height;
 
-            canvas.width = this.naturalWidth;
-            canvas.height = this.naturalHeight;
+            canvas.width = width;
+            canvas.height = height;
 
-            canvas.getContext('2d').drawImage(this, 0, 0);
+            canvas.getContext('2d').drawImage(this, 0, 0, width, height);
             // Data URI
             resolve(canvas.toDataURL('image/png'));
         };

@@ -24,6 +24,7 @@
     <img src="./liyu_icon_br_a.png" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
     <img src="./liyu_icon_br_a.png" data-src="http://ww4.sinaimg.cn/large/006y8mN6gw1fa5obmqrmvj305k05k3yh.jpg" alt="">
 
+    <video src=""></video>
     <script>
         function throttle(fun, delay, time) {
             var timeout,
@@ -66,6 +67,36 @@
     }
     // 采用了节流函数
     window.addEventListener('scroll', throttle(lazyload,500,1000));
+    </script>
+    <script>
+        // 视频转 base64
+        function getVideoBase64(url) {
+            return new Promise(function (resolve, reject) {
+                let dataURL = '';
+                let video = document.createElement("video");
+                video.setAttribute("crossOrigin", 'Anonymous'); // 允许跨域获取该图片
+                video.setAttribute('src', url);
+                video.setAttribute('width', 400);
+                video.setAttribute('height', 240);
+                video.addEventListener('loadeddata', function () {
+                    let canvas = document.createElement("canvas"),
+                        width = video.width, //canvas的尺寸和图片一样
+                        height = video.height;
+                    canvas.width = width;
+                    canvas.height = height;
+                    canvas.getContext("2d").drawImage(video, 0, 0, width, height); //绘制canvas
+                    dataURL = canvas.toDataURL('image/jpeg'); //转换为base64
+                    console.log(dataURL);
+                    debugger
+                    resolve(dataURL);
+                });
+            });
+        }
+        
+        getVideoBase64('http://42.81.160.213:808//images/Borrower/68c591052aca48eea0f9907301cfa6e4/ba2b82afb5b44197b97b84fbe425a102/ba2b82afb5b44197b97b84fbe425a102.mp4').then(res => {
+            // 转化后的 base64 图片地址
+            console.log('base64', res);
+        });
     </script>
 </body>
 </html>

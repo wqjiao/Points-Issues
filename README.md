@@ -40,6 +40,9 @@
 36. [深拷贝与浅拷贝的区别](https://github.com/wqjiao/Points-Issues/issues/36)
 37. [动态替换 favicon.ico 图片](https://github.com/wqjiao/Points-Issues/issues/37)
 38. [substr、substring 及 slice 区别](https://github.com/wqjiao/Points-Issues/issues/38)
+39. [将 字符串 '1000000000' 转换成 '1,000,000,000'](https://github.com/wqjiao/Points-Issues/issues/39)
+40. [替换对象中 key 名称](https://github.com/wqjiao/Points-Issues/issues/40)
+41. [浏览器的重排重绘](https://github.com/wqjiao/Points-Issues/issues/41)
 
 
 <!-- tagcanvas 只做抽奖功能 -->
