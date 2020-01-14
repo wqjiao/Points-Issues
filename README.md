@@ -43,6 +43,6 @@
 39. [将 字符串 '1000000000' 转换成 '1,000,000,000'](https://github.com/wqjiao/Points-Issues/issues/39)
 40. [替换对象中 key 名称](https://github.com/wqjiao/Points-Issues/issues/40)
 41. [浏览器的重排重绘](https://github.com/wqjiao/Points-Issues/issues/41)
-
+41. [<> 与 <React.Fragment> 的区别](https://github.com/wqjiao/Points-Issues/issues/42)
 
 <!-- tagcanvas 只做抽奖功能 -->
