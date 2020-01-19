@@ -286,6 +286,34 @@
 
 more and more： https://code.visualstudio.com/docs/getstarted/keybindings
 
+* 9、`REST Client` (API 调用调试，类似于 Postman)
+
+- 步骤：安装 `REST Client` 插件 --> 创建一个 `.http` 或 `.rest` 文件 --> 写入测试接口
+
+```js
+POST http://192.168.1.154:5069/system/user/getMenuInfo?needUser=true HTTP/1.1
+content-Type: application/x-www-form-urlencoded; charset=utf-8
+Accept-Language: zh-CN,zh;q=0.9
+Authorization: 7b2653e1f162326b63b28bf01daa40ae
+
+{
+    "name":"Hendry",
+    "salary":"61888",
+    "age":"26"
+}
+
+###
+
+POST http://192.168.1.154:5069/system/config/params HTTP/1.1
+Content-Type: application/x-www-form-urlencoded; charset=utf-8
+Authorization: 7b2653e1f162326b63b28bf01daa40ae
+```
+
+- 注意：
+  写入多个测试接口时，需要使用 `###` 进行分割；
+  运行：在文件区域右击选择 `Send Request` 或者 快捷键 `Ctrl + Alt + R` 或者 `Cmd + Alt + R`
+
+
 ## 六、折叠区域代码
 
 * 1、折叠所有区域代码的快捷： ctrl + k ctrl + 0 ;
