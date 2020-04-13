@@ -43,6 +43,8 @@
 39. [将 字符串 '1000000000' 转换成 '1,000,000,000'](https://github.com/wqjiao/Points-Issues/issues/39)
 40. [替换对象中 key 名称](https://github.com/wqjiao/Points-Issues/issues/40)
 41. [浏览器的重排重绘](https://github.com/wqjiao/Points-Issues/issues/41)
-41. [<> 与 <React.Fragment> 的区别](https://github.com/wqjiao/Points-Issues/issues/42)
+42. [<> 与 <React.Fragment> 的区别](https://github.com/wqjiao/Points-Issues/issues/42)
+43. [event.preventDefault() 和 event.stopPropagation()方法之间有什么区别？](https://github.com/wqjiao/Points-Issues/issues/43)
+44. [event.defaultPrevented 与 event.preventDefault](https://github.com/wqjiao/Points-Issues/issues/44)
 
 <!-- tagcanvas 只做抽奖功能 -->
