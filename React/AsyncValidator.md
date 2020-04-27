@@ -93,8 +93,3 @@ validator.validate({ name: "muji", age: 16 }).then(() => {
 
 通过正则表达式匹配该字段接收值是否符合要求
 
-通知公告：/noticeAnnouncement
-通知公告列表：/noticeAnnouncement/noticeList
-
-通知公告管理：/noticeManage
-通知公告管理：/noticeManage/noticeManageList
