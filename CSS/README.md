@@ -351,3 +351,17 @@ div {
 }
 ```
 
+## 10. 盒模型是有两种标准的，一个是标准模型，一个是IE模型
+
+* 标准模型:只包含内容 content 的宽高
+
+* IE模型：盒模型的宽高是内容(content)+填充(padding)+边框(border)的总宽高
+
+* css 设置两种模型：
+```css
+/* 标准模型 */
+box-sizing:content-box;
+ /* IE模型 */
+box-sizing:border-box;
+```
+
