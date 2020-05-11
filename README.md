@@ -52,5 +52,14 @@
 48. [盒子模型](https://github.com/wqjiao/Points-Issues/issues/48)
 49. [rem 的实现原理](https://github.com/wqjiao/Points-Issues/issues/49)
 50. [移动端 Retina 屏幕 1px 的解决方案](https://github.com/wqjiao/Points-Issues/issues/50)
-51. []()
+51. [防抖与节流的区别](https://github.com/wqjiao/Points-Issues/issues/51)
+52. [vue $.nextTick 作用](https://github.com/wqjiao/Points-Issues/issues/52)
+53. [Vue 中的data为什么以函数的方式](https://github.com/wqjiao/Points-Issues/issues/53)
+54. [vue 中 v-show 和 v-if 指令的共同点和不同点](https://github.com/wqjiao/Points-Issues/issues/54)
+
+* vue 父子组件传值
+* vue 路由跳转方式有哪些
+* keep-alive 作用
+    
+<!-- [setTimeout、Promise、Async/Await的区别](https://github.com/wqjiao/Points-Issues/issues/) -->
 <!-- tagcanvas 只做抽奖功能 -->
