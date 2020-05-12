@@ -56,6 +56,11 @@
 52. [vue $.nextTick 作用](https://github.com/wqjiao/Points-Issues/issues/52)
 53. [Vue 中的data为什么以函数的方式](https://github.com/wqjiao/Points-Issues/issues/53)
 54. [vue 中 v-show 和 v-if 指令的共同点和不同点](https://github.com/wqjiao/Points-Issues/issues/54)
+55. [Vue 中 为什么避免 v-if 和 v-for 用在一起](https://github.com/wqjiao/Points-Issues/issues/55)
+56. [Vue 中遍历数组为什么使用key](https://github.com/wqjiao/Points-Issues/issues/56)
+57. [vuex 使用场景](https://github.com/wqjiao/Points-Issues/issues/57)
+58. [vuex 包含几种属性](https://github.com/wqjiao/Points-Issues/issues/58)
+59. [vuex 中状态存在哪里，如何修改](https://github.com/wqjiao/Points-Issues/issues/59)
 
 * vue 父子组件传值
 * vue 路由跳转方式有哪些
