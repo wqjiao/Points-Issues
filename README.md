@@ -61,10 +61,14 @@
 57. [vuex 使用场景](https://github.com/wqjiao/Points-Issues/issues/57)
 58. [vuex 包含几种属性](https://github.com/wqjiao/Points-Issues/issues/58)
 59. [vuex 中状态存在哪里，如何修改](https://github.com/wqjiao/Points-Issues/issues/59)
+60. [React组件通信如何实现?](https://github.com/wqjiao/Points-Issues/issues/60)
+61. [redux的工作流程?](https://github.com/wqjiao/Points-Issues/issues/61)
+62. [React 中setState的'异步'执行](https://github.com/wqjiao/Points-Issues/issues/62)
 
 * vue 父子组件传值
 * vue 路由跳转方式有哪些
 * keep-alive 作用
+* origin = /^https?:\/\/[\w-.]+(:\d+)?/i.exec(url)[0]
     
 <!-- [setTimeout、Promise、Async/Await的区别](https://github.com/wqjiao/Points-Issues/issues/) -->
 <!-- tagcanvas 只做抽奖功能 -->
