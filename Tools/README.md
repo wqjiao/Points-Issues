@@ -2,6 +2,6 @@
 
 * [Browser](./Browser.md)
 * [FTP](./FTP.md)
-* [gitlab-li](./gitlab-li.md)
+* [gitlab-ci](./gitlab-ci.md)
 * [Moment](./Moment.md)
 * [vscode](./vscode.md)
