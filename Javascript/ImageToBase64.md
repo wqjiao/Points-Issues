@@ -51,7 +51,7 @@ function getDataUri(url) {
 }
 
 // url -> base64
-getDataUri('http://img.che300.com/jiance/201902/2710/5c75f2843c503309600.jpg').then(res => {
+getDataUri(imageUrl).then(res => {
     // 转化后的 base64 图片地址
     console.log('base64', res);
 });

@@ -1361,7 +1361,7 @@ for (var i = 0; i < 4; i++) {
 
 ```js
 let link = document.getElementById('favicon');
-link.href = "https://assets.che300.com/feimg/incoming/loginLogo.png";
+link.href = "http://loginLogo.png";
 ```
 
 ## 39.substr、substring 及 slice 区别
