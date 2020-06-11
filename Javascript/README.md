@@ -351,6 +351,8 @@ Function.prototype.bind 来为事件处理函数传递参数
     for (var i in obj) {
         console.log(i, obj[i]);
     }
+    
+注意：`for..in` 不能保证元素的顺序。
 
 * 2、Object.getOwnPropertyNames()
 
