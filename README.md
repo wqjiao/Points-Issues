@@ -65,8 +65,9 @@
 61. [redux的工作流程?](https://github.com/wqjiao/Points-Issues/issues/61)
 62. [React 中setState的'异步'执行](https://github.com/wqjiao/Points-Issues/issues/62)
 63. [Vue 路由跳转方式](https://github.com/wqjiao/Points-Issues/issues/63)
-64. [Vue 父子组件传值](https://github.com/wqjiao/Points-Issues/issues/64)
-65. [keep-alive 作用](https://github.com/wqjiao/Points-Issues/issues/65)
+64. [v-model 遇到 vuex 为什么会报错](https://github.com/wqjiao/Points-Issues/issues/64)
+65. [Vue 父子组件传值](https://github.com/wqjiao/Points-Issues/issues/64)
+66. [keep-alive 作用](https://github.com/wqjiao/Points-Issues/issues/65)
 
     
 <!-- [setTimeout、Promise、Async/Await的区别](https://github.com/wqjiao/Points-Issues/issues/) -->
