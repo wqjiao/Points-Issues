@@ -75,7 +75,7 @@ _dvaDynamic({
 asyncComponent(() =>import(/* webpackChunkName: '`${key.name}`' */ `@/pages/${key.name}`))
 ```
 
-react-router4 不再推荐将所有路由规则放在同一个地方集中式路由，子路由应该由父组件动态配置，组件在哪里匹配就在哪里渲染，更加灵活。
+`react-router4` 不再推荐将所有路由规则放在同一个地方集中式路由，子路由应该由父组件动态配置，组件在哪里匹配就在哪里渲染，更加灵活。
 
 ```js
 const Inbox = ({ match }) => (
@@ -178,4 +178,3 @@ export default class Routes extends Component {
     }
 }
 ```
-
