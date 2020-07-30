@@ -738,23 +738,93 @@ str.split('').reverse().join('');
 
 ## 16.前后端跨域问题
 
-* 方式一：JSONP
+### 16.1、JSONP
 
-基本原理就是通过动态创建script标签,然后利用src属性进行跨域,但是要注意JSONP只支持GET请求，不支持POST请求。
+* `<script src=""></script>`
 
-* 方式二：CORS 跨域资源共享
-
-利用 nginx 或者 php、java 等后端语言设置允许跨域请求
+基本原理就是通过动态创建 `script` 标签，然后利用 `src` 属性进行跨域(后端用回调函数名称包裹数据进行返回即可)，但是要注意 `JSONP` 只支持 `GET` 请求，不支持 `POST` 请求:
 ```js
-header('Access-Control-Allow-Origin:*'); // 允许所有来源访问
-header('Access-Control-Allow-Method:POST,GET'); // 允许访问的方式
+// 回调函数
+function showData (result) {
+    // json 对象转成字符串
+    $('#text').val(JSON.stringify(result));
+}
+$(document).ready(function () {
+    $('#btn').click(function () {
+        //向头部输入一个脚本，该脚本发起一个跨域请求
+        $('head').append('<script src="http://localhost:9090/student?callback=showData"><\/script>');
+    });
+});
 ```
 
-* 方式三：服务器代理
+* `jQuery` 的 `JSONP` 请求
+
+```js
+$(document).ready(function () {
+    $('#btn').click(function () {
+        $.ajax({
+            url: 'http://localhost:9090/student',
+            type: 'GET',
+            dataType: 'jsonp', // 指定服务器返回的数据类型
+            success: function (data) {
+                // json对象转成字符串
+                $('#text').val(JSON.stringify(data));
+            }
+        });
+    });
+});
+```
+
+### 16.2、CORS 跨域资源共享
+
+利用 `nginx` 或者 `php`、`java` 等后端语言设置允许跨域请求:
+```js
+header('Access-Control-Allow-Origin: *'); // 允许所有来源访问
+header('Access-Control-Allow-Method: POST,GET'); // 允许访问的方式
+```
+
+### 16.3、服务器代理
 
 浏览器有跨域限制，但是服务器不存在跨域问题，所以可以由服务器请求所要域的资源再返回给客户端。
 
-* 方式四：Nginx 反向代理
+* `Nodejs` 做代理(`eggjs`)
+```js
+async demo() {
+    const { ctx: {inputs} } = this;
+    const params = {
+        ...inputs,
+        token: '6f94a4917d57442c838f8476978ac475'
+    };
+    // 第三方接口地址
+    const url = 'http://api.map.baidu.com/location/ip';
+    // 获取第三方接口
+    const data = await this.ctx.curl(url, {
+        method: 'POST',
+        dataType: 'text',
+        timeout: 10000,
+        data: params
+    });
+    // 返回数据
+    this.success({
+        data: data.data
+    });
+}
+```
+
+### 16.4、Nginx 反向代理
+
+在配置文件 `nginx.conf` 中添加以下配置：
+```
+location / {  
+    add_header Access-Control-Allow-Origin *;
+    add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+    add_header Access-Control-Allow-Headers 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization';
+
+    if ($request_method = 'OPTIONS') {
+        return 204;
+    }
+}
+```
 
 ## 17.Canvas 图片跨域问题
 
