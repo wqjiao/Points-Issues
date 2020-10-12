@@ -95,3 +95,13 @@ static getDerivedStateFromError()
 componentDidCatch()
 ```
 
+## Storybook for React
+
+参考网址详见 [Storybook](https://storybook.js.org/docs/react/get-started/introduction)
+
+```
+npx sb init
+npm run storybook
+```
+
+![video](https://storybook.js.org/7e71705d211e17a2967606c49059e891/storybook-hero-video-optimized.mp4)
