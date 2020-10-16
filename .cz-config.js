@@ -30,3 +30,6 @@ module.exports = {
     allowCustomScopes: true,
     allowBreakingChanges: ["feat", "fix"],
 };
+
+// husky 坑，详见 https://www.yuque.com/dingyin-pahte/lnv9wi/nizvqp
+// husky 针对 node 与 git 有版本要求，如 husky v4.3.0 要求：`Existing hooks are kept. Requires Node >= 10 and Git >= 2.13.0.`，否则不走 husky 校验，详见 https://www.npmjs.com/package/husky
