@@ -71,6 +71,7 @@
 67. [老生常谈之跨域](https://github.com/wqjiao/Points-Issues/issues/67)
 68. [map 遍历那些事](https://github.com/wqjiao/Points-Issues/issues/68)
 69. [前端如何实现图片下载](https://github.com/wqjiao/Points-Issues/issues/69)
-    
+70. [锚点定位跳转](https://github.com/wqjiao/Points-Issues/issues/70)
+
 <!-- [setTimeout、Promise、Async/Await的区别](https://github.com/wqjiao/Points-Issues/issues/) -->
 <!-- tagcanvas 只做抽奖功能 -->
