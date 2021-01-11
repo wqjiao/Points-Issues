@@ -105,3 +105,8 @@ npm run storybook
 ```
 
 ![video](https://storybook.js.org/7e71705d211e17a2967606c49059e891/storybook-hero-video-optimized.mp4)
+
+## 检验类型
+
+* [async-validator](./AsyncValidator.md)
+* [class-validator](./ClassValidator.md)
