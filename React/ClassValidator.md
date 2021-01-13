@@ -92,6 +92,12 @@ import {
 } from 'class-validator';
 
 export class Post {
+    @MaxLength(20, {
+        each: true,
+    })
+    tags: string[]; // 数组
+    // tags: Set<string>; // 集合
+
     @Length(10, 20)
     title: string;
 
