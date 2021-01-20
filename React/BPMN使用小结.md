@@ -554,6 +554,33 @@ ColorPicker.$inject = [
 | slice | 保持纵横比同时比例小的方向放大填满viewport | 
 | none | 扭曲纵横比以充分适应viewport，变态 | 
 
+* 修改形状
+
+例如修改结束节点形状：找到控制该形状的属性 -> 修改形状入口
+
+- [ReplaceOptions](https://github.com/bpmn-io/bpmn-js/blob/8faee2bde9a74b75b4b6bb9b003507652e75c9c5/lib/features/replace/ReplaceOptions.js)
+
+```js
+{
+    label: 'Terminate End Event',
+    actionName: 'replace-with-terminate-end',
+    className: 'bpmn-icon-end-event-terminate',
+    target: {
+        type: 'bpmn:EndEvent',
+        eventDefinitionType: 'bpmn:TerminateEventDefinition'
+    }
+}
+```
+
+- [CustomPalette](https://github.com/bpmn-io/bpmn-js-example-custom-shapes/blob/8be25126bd5b931c62b57057cf2c30d70fea8298/app/custom-modeler/custom/CustomPalette.js)
+
+```js
+// createAction(type, group, className, title, options, customType)
+'create.subprocess-expanded': createAction(
+    'bpmn:SubProcess', 'activity', 'bpmn-icon-subprocess-expanded', 'Create expanded SubProcess', { isExpanded: true }
+)
+```
+
 ## 更多网址
 
 * [BPMN官网](https://bpmn.io/toolkit/bpmn-js/)
