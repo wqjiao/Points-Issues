@@ -72,7 +72,8 @@
 68. [map 遍历那些事](https://github.com/wqjiao/Points-Issues/issues/68)
 69. [前端如何实现图片下载](https://github.com/wqjiao/Points-Issues/issues/69)
 70. [清除浮动元素对父元素的影响](https://github.com/wqjiao/Points-Issues/issues/70)
-71. [锚点定位跳转](https://github.com/wqjiao/Points-Issues/issues/71)
+71. [当async/await遇到遍历]](https://github.com/wqjiao/Points-Issues/issues/71)
+72. [锚点定位跳转](https://github.com/wqjiao/Points-Issues/issues/72)
 
 <!-- [setTimeout、Promise、Async/Await的区别](https://github.com/wqjiao/Points-Issues/issues/) -->
 <!-- tagcanvas 只做抽奖功能 -->
