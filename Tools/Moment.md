@@ -144,3 +144,4 @@ function getDateRange(type) {
 ```
 
 * [moment 官网](http://momentjs.com/docs/#/query/is-after/)
+* 与 moment 类似的一个日期处理插件，体积小 [dayjs](https://github.com/iamkun/dayjs)
