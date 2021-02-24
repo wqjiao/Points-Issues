@@ -74,6 +74,7 @@
 70. [清除浮动元素对父元素的影响](https://github.com/wqjiao/Points-Issues/issues/70)
 71. [当async/await遇到遍历]](https://github.com/wqjiao/Points-Issues/issues/71)
 72. [锚点定位跳转](https://github.com/wqjiao/Points-Issues/issues/72)
+73. [React 路由传参跳转](https://github.com/wqjiao/Points-Issues/issues/73)
 
 <!-- [setTimeout、Promise、Async/Await的区别](https://github.com/wqjiao/Points-Issues/issues/) -->
 <!-- tagcanvas 只做抽奖功能 -->
