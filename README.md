@@ -76,6 +76,7 @@
 <!-- 72. [锚点定位跳转](https://github.com/wqjiao/Points-Issues/issues/72) -->
 72. [React 路由传参跳转](https://github.com/wqjiao/Points-Issues/issues/72)
 73. [检测数据类型的方式](https://github.com/wqjiao/Points-Issues/issues/73)
+74. [Promise](https://github.com/wqjiao/Points-Issues/issues/74)
 
 <!-- [setTimeout、Promise、Async/Await的区别](https://github.com/wqjiao/Points-Issues/issues/) -->
 <!-- tagcanvas 只做抽奖功能 -->

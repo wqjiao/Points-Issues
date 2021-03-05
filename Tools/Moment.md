@@ -145,3 +145,5 @@ function getDateRange(type) {
 
 * [moment 官网](http://momentjs.com/docs/#/query/is-after/)
 * 与 moment 类似的一个日期处理插件，体积小 [dayjs](https://github.com/iamkun/dayjs)
+    > 优点：体积小
+    > 缺点：两个项目中引入 dayjs，并在一个项目中执行 dayjs() 传入另一个项目使用 dayjs.isDayjs(time) 时返回 false
