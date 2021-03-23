@@ -78,6 +78,7 @@
 73. [检测数据类型的方式](https://github.com/wqjiao/Points-Issues/issues/73)
 74. [Promise](https://github.com/wqjiao/Points-Issues/issues/74)
 75. [export 与 export default 区别](https://github.com/wqjiao/Points-Issues/issues/75)
+76. [JS 跳出循环](https://github.com/wqjiao/Points-Issues/issues/76)
 
 <!-- [setTimeout、Promise、Async/Await的区别](https://github.com/wqjiao/Points-Issues/issues/) -->
 <!-- tagcanvas 只做抽奖功能 -->
