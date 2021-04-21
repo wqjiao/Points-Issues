@@ -79,6 +79,7 @@
 74. [Promise](https://github.com/wqjiao/Points-Issues/issues/74)
 75. [export 与 export default 区别](https://github.com/wqjiao/Points-Issues/issues/75)
 76. [JS 跳出循环](https://github.com/wqjiao/Points-Issues/issues/76)
+77. [修改 SVG 图标颜色](https://github.com/wqjiao/Points-Issues/issues/77)
 
 <!-- [setTimeout、Promise、Async/Await的区别](https://github.com/wqjiao/Points-Issues/issues/) -->
 <!-- tagcanvas 只做抽奖功能 -->
